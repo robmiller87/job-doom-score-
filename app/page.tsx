@@ -184,7 +184,14 @@ export default function Home() {
           
           <div className="text-6xl md:text-8xl mb-2 md:mb-4">{emoji}</div>
           <div className={`text-4xl md:text-6xl font-black mb-1 md:mb-2 ${color}`}>{tier}</div>
-          <p className="text-lg md:text-xl text-gray-700 mb-4 md:mb-8">"{message}"</p>
+          <p className="text-lg md:text-xl text-gray-700 mb-2 md:mb-4">"{message}"</p>
+          
+          <button
+            onClick={() => setShowFeedback(true)}
+            className="text-gray-400 hover:text-gray-600 text-xs underline mb-4 md:mb-6"
+          >
+            Disagree? Tell us why →
+          </button>
 
           {(result.goodFactors?.length > 0 || result.badFactors?.length > 0) && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-8 max-w-2xl mx-auto">
@@ -232,15 +239,6 @@ export default function Home() {
           >
             Check another profile
           </button>
-
-          <div className="mt-4">
-            <button
-              onClick={() => setShowFeedback(true)}
-              className="text-gray-400 hover:text-gray-600 text-xs underline"
-            >
-              Disagree? Tell us why →
-            </button>
-          </div>
 
           {/* Feedback Modal */}
           {showFeedback && (
