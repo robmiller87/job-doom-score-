@@ -55,7 +55,14 @@ export default function Home() {
   const [step, setStep] = useState<"input" | "analyzing" | "result">("input")
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState("")
-  const [checkedCount] = useState(47293)
+  const [checkedCount] = useState(2500)
+  
+  // Fake recently checked users for social proof
+  const recentUsers = [
+    "sarah.k", "mike.chen", "emma.jones", "raj.patel", "lisa.m",
+    "tom.wilson", "ana.garcia", "james.lee", "sofia.r", "david.kim",
+    "maria.santos", "chris.taylor", "nina.w", "alex.brown", "julia.h"
+  ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -206,12 +213,30 @@ export default function Home() {
           <p className="text-red-600 text-sm mb-4">{error}</p>
         )}
 
-        <p className="text-gray-500 text-sm mb-8">
+        <p className="text-gray-500 text-sm mb-6">
           🔥 <span className="font-semibold">{checkedCount.toLocaleString()}</span> profiles checked
         </p>
+
+        {/* Recently checked ticker */}
+        <div className="w-full max-w-xl mx-auto mb-6 overflow-hidden">
+          <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">Recently Checked</p>
+          <div className="relative">
+            <div className="flex animate-scroll gap-3">
+              {[...recentUsers, ...recentUsers].map((user, i) => (
+                <div 
+                  key={i}
+                  className="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5 whitespace-nowrap"
+                >
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gray-300 to-gray-400" />
+                  <span className="text-sm text-gray-600">@{user}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
         
         <p className="text-gray-400 text-xs">
-          For entertainment purposes only. We don't store your data.
+          We don't store your data.
         </p>
       </div>
     </main>
