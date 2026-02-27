@@ -56,7 +56,7 @@ export default function Home() {
   const [step, setStep] = useState<"input" | "analyzing" | "result">("input")
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState("")
-  const [checkedCount] = useState(2500)
+  const [checkedCount] = useState(2578)
   const [showFeedback, setShowFeedback] = useState(false)
   const [feedbackText, setFeedbackText] = useState("")
   const [feedbackEmail, setFeedbackEmail] = useState("")
