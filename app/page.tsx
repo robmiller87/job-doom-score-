@@ -8,6 +8,12 @@ interface AnalysisResult {
   goodFactors: string[]
   badFactors: string[]
   jobTitle: string
+  timeline?: {
+    "2025": string
+    "2027": string
+    "2030": string
+    "2035": string
+  }
 }
 
 interface TierResult {
@@ -169,6 +175,36 @@ export default function Home() {
           <div className="bg-black text-white p-4 rounded-lg mb-6 text-center">
             <p className="text-lg font-medium">🔥 {result.roast}</p>
           </div>
+
+          {/* Timeline */}
+          {result.timeline && (
+            <div className="mb-6">
+              <p className="text-sm font-bold text-gray-500 uppercase tracking-wide mb-3 text-center">📅 AI Impact Timeline</p>
+              <div className="relative">
+                {/* Timeline line */}
+                <div className="absolute left-4 top-2 bottom-2 w-0.5 bg-gradient-to-b from-green-400 via-yellow-400 via-orange-400 to-red-500"></div>
+                
+                {/* Timeline items */}
+                <div className="space-y-3">
+                  {Object.entries(result.timeline).map(([year, desc], i) => (
+                    <div key={year} className="flex items-start gap-3 pl-2">
+                      <div className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white ${
+                        i === 0 ? 'bg-green-500' :
+                        i === 1 ? 'bg-yellow-500' :
+                        i === 2 ? 'bg-orange-500' : 'bg-red-500'
+                      }`}>
+                        {i === 0 ? '→' : i === 3 ? '!' : ''}
+                      </div>
+                      <div className="flex-1 bg-gray-100 rounded-lg p-3">
+                        <span className="font-bold text-black">{year}:</span>
+                        <span className="text-gray-700 ml-2">{desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Factors */}
           <div className="grid grid-cols-2 gap-4 mb-6">

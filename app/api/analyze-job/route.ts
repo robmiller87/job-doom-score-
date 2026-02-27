@@ -33,12 +33,20 @@ RULES:
 - Add dark humor to the roast
 - Keep factors short and punchy (under 8 words each)
 
+Also provide a timeline showing when AI impact hits this job:
+
 Return ONLY valid JSON:
 {
   "score": <0-100>,
   "roast": "<one brutal sentence about their future>",
   "goodFactors": ["<why they might survive>", "<another reason>"],
-  "badFactors": ["<why AI is coming>", "<another threat>"]
+  "badFactors": ["<why AI is coming>", "<another threat>"],
+  "timeline": {
+    "2025": "<current state, e.g. 'AI tools emerging'>",
+    "2027": "<near-term impact>",
+    "2030": "<medium-term, e.g. '40% tasks automated'>",
+    "2035": "<long-term outlook>"
+  }
 }`
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -72,7 +80,8 @@ Return ONLY valid JSON:
           roast: parsed.roast || "AI is watching you.",
           goodFactors: parsed.goodFactors || [],
           badFactors: parsed.badFactors || [],
-          jobTitle: jobTitle.trim()
+          jobTitle: jobTitle.trim(),
+          timeline: parsed.timeline || null
         })
       }
     } catch (e) {
