@@ -237,15 +237,10 @@ export async function POST(request: NextRequest) {
                      profile.firstName || null
     const firstName = fullName?.split(' ')[0] || null
 
-    console.log('Profile analyzed:', { 
-      name: fullName, 
-      score: analysis.score,
-      usingGPT: !!OPENAI_API_KEY,
-      experienceCount: profile.experiences?.length,
-      firstExpTitle: profile.experiences?.[0]?.title || profile.experiences?.[0]?.position || 'none',
-      firstExpCompany: profile.experiences?.[0]?.company || profile.experiences?.[0]?.company_name || 'none',
-      rawFirstExp: JSON.stringify(profile.experiences?.[0] || {}).slice(0, 200)
-    })
+    // Log experience data separately for visibility
+    const exp0 = profile.experiences?.[0]
+    console.log('EXPERIENCE_CHECK:', exp0?.title || exp0?.position || 'NO_TITLE', 'at', exp0?.company || 'NO_COMPANY')
+    console.log('Profile:', fullName, 'Score:', analysis.score, 'ExpCount:', profile.experiences?.length || 0)
 
     return NextResponse.json({
       score: analysis.score,
