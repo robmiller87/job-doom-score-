@@ -167,10 +167,10 @@ Check yours: https://doomcheck.com`
         <div className="max-w-md w-full">
           {/* Header */}
           <div className="text-center mb-4">
-            <h1 className="text-lg font-bold">
+            <button onClick={reset} className="text-lg font-bold hover:opacity-70 transition">
               <span className="text-black">😬 DOOM</span>
               <span className="text-orange-500">CHECK</span>
-            </h1>
+            </button>
           </div>
 
           {/* Result Card - Screenshot friendly */}
