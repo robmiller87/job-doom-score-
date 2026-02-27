@@ -3,18 +3,18 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Are You Doomed? | AI Job Risk Calculator",
-  description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
+  description: "300 million jobs will be affected by AI. Is yours one of them? Paste your LinkedIn and find out in 10 seconds.",
   metadataBase: new URL('https://doomcheck.com'),
   openGraph: {
     title: "Are You Doomed? | AI Job Risk Calculator",
-    description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
+    description: "300 million jobs will be affected by AI. Is yours one of them? Paste your LinkedIn and find out in 10 seconds.",
     type: "website",
-    siteName: "Are You Doomed?",
+    siteName: "DoomCheck",
   },
   twitter: {
     card: "summary_large_image",
     title: "Are You Doomed?",
-    description: "I just got my AI doom score. How doomed are you?",
+    description: "300 million jobs will be affected by AI. Is yours one of them?",
   },
 }
 
