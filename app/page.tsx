@@ -255,21 +255,15 @@ export default function Home() {
             <div className="flex gap-3">
               <button
                 onClick={shareTwitter}
-                className="flex-1 bg-black text-white py-3 px-4 rounded-xl font-bold hover:bg-gray-800 transition text-sm sm:text-base"
+                className="flex-1 bg-black text-white py-3 px-4 rounded-xl font-bold hover:bg-gray-800 transition"
               >
-                𝕏 SHARE
-              </button>
-              <button
-                onClick={shareLinkedIn}
-                className="flex-1 bg-[#0077b5] text-white py-3 px-4 rounded-xl font-bold hover:bg-[#006097] transition text-sm sm:text-base"
-              >
-                in SHARE
+                𝕏 POST
               </button>
               <button
                 onClick={copyLink}
-                className="bg-gray-200 text-gray-700 py-3 px-4 rounded-xl font-bold hover:bg-gray-300 transition"
+                className="flex-1 bg-gray-200 text-gray-700 py-3 px-4 rounded-xl font-bold hover:bg-gray-300 transition"
               >
-                🔗
+                🔗 COPY LINK
               </button>
             </div>
           </div>
