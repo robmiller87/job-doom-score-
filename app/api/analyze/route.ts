@@ -259,7 +259,7 @@ export async function POST(request: NextRequest) {
 
     // Log experience data + all available keys
     const exp0 = profile.experiences?.[0]
-    console.log('PROFILE_KEYS:', Object.keys(profile).join(','))
+    console.log('CURRENT_POS:', profile.card_current_position || 'NONE')
     console.log('Profile:', fullName, 'Score:', analysis.score)
 
     return NextResponse.json({
