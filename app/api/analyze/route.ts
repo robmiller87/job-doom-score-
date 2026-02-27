@@ -27,7 +27,7 @@ PROFILE DATA:
 - Industry: ${profile.industry || 'Unknown'}
 
 JOB TITLES FROM EXPERIENCE:
-${(profile.experiences || []).slice(0, 5).map((e: any) => `- ${e.title} at ${e.company}`).join('\n') || 'None listed'}
+${(profile.experiences || []).slice(0, 5).map((e: any) => `- ${e.title || e.position || e.role || 'Unknown'} at ${e.company || e.company_name || 'Unknown'}`).join('\n') || 'None listed'}
 
 SCORING GUIDELINES:
 - 0-20 (SAFE): Founders, CEOs, investors, capital allocators, people with massive followings (50K+), business owners, people who run their own company/newsletter/media
@@ -238,7 +238,11 @@ export async function POST(request: NextRequest) {
     console.log('Profile analyzed:', { 
       name: fullName, 
       score: analysis.score,
-      usingGPT: !!OPENAI_API_KEY
+      usingGPT: !!OPENAI_API_KEY,
+      experienceCount: profile.experiences?.length,
+      firstExpTitle: profile.experiences?.[0]?.title || profile.experiences?.[0]?.position || 'none',
+      firstExpCompany: profile.experiences?.[0]?.company || profile.experiences?.[0]?.company_name || 'none',
+      rawFirstExp: JSON.stringify(profile.experiences?.[0] || {}).slice(0, 200)
     })
 
     return NextResponse.json({
