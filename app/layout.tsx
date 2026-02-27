@@ -2,17 +2,17 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "How Fucked Are You? | AI Job Apocalypse Calculator",
-  description: "Find out how at-risk your job is from AI automation. Get your doom score.",
+  title: "Are You Doomed? | AI Job Risk Calculator",
+  description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
   openGraph: {
-    title: "How Fucked Are You? | AI Job Apocalypse Calculator",
-    description: "Find out how at-risk your job is from AI automation.",
+    title: "Are You Doomed? | AI Job Risk Calculator",
+    description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "How Fucked Are You?",
-    description: "I just got my AI doom score. How fucked are you?",
+    title: "Are You Doomed?",
+    description: "I just got my AI doom score. How doomed are you?",
   },
 }
 
@@ -23,9 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white min-h-screen antialiased">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
