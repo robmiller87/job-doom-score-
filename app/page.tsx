@@ -4,7 +4,8 @@ import { useState } from "react"
 
 interface AnalysisResult {
   score: number
-  factors: string[]
+  goodFactors: string[]
+  badFactors: string[]
   name: string | null
   profilePic: string | null
   headline: string | null
@@ -163,14 +164,28 @@ export default function Home() {
           <div className={`text-5xl md:text-6xl font-black mb-2 ${color}`}>{tier}</div>
           <p className="text-xl text-gray-700 mb-8">"{message}"</p>
 
-          {result.factors && result.factors.length > 0 && (
-            <div className="bg-white border-2 border-black p-4 mb-8 text-left max-w-sm mx-auto">
-              <p className="font-bold text-sm uppercase tracking-wider mb-2">Why:</p>
-              <ul className="text-sm text-gray-700 space-y-2">
-                {result.factors.map((factor, i) => (
-                  <li key={i}>• {factor}</li>
-                ))}
-              </ul>
+          {(result.goodFactors?.length > 0 || result.badFactors?.length > 0) && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 max-w-2xl mx-auto">
+              {result.badFactors?.length > 0 && (
+                <div className="bg-red-50 border-2 border-red-200 p-4 text-left">
+                  <p className="font-bold text-sm uppercase tracking-wider mb-2 text-red-700">⚠️ Working Against You</p>
+                  <ul className="text-sm text-gray-700 space-y-2">
+                    {result.badFactors.map((factor, i) => (
+                      <li key={i}>• {factor}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {result.goodFactors?.length > 0 && (
+                <div className="bg-green-50 border-2 border-green-200 p-4 text-left">
+                  <p className="font-bold text-sm uppercase tracking-wider mb-2 text-green-700">✅ Working For You</p>
+                  <ul className="text-sm text-gray-700 space-y-2">
+                    {result.goodFactors.map((factor, i) => (
+                      <li key={i}>• {factor}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
 
