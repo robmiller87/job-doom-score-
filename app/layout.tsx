@@ -12,10 +12,10 @@ export const metadata: Metadata = {
     siteName: "DoomCheck",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.png?v=2",
         width: 1200,
         height: 630,
-        alt: "DoomCheck - Are You Doomed?",
+        alt: "DoomCheck - Are You Cooked?",
       },
     ],
   },
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Are You Cooked?",
     description: "Find out if AI is coming for your job. Takes 5 seconds.",
-    images: ["/og-image.png"],
+    images: ["/og-image.png?v=2"],
   },
 }
 
