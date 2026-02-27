@@ -4,10 +4,12 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Are You Doomed? | AI Job Risk Calculator",
   description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
+  metadataBase: new URL('https://job-doom-score.vercel.app'),
   openGraph: {
     title: "Are You Doomed? | AI Job Risk Calculator",
     description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
     type: "website",
+    siteName: "Are You Doomed?",
   },
   twitter: {
     card: "summary_large_image",
