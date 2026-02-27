@@ -53,6 +53,11 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'ceo': 'You deploy AI, not compete with it',
     'cto': 'You choose which AI to use',
     'cfo': 'Fiduciary responsibility = human required',
+    'head of': 'Leadership roles harder to automate',
+    'senior': 'Seniority = relationships + judgment AI lacks',
+    'leader': 'Leadership requires human accountability',
+    'principal': 'Principal roles = strategic, not routine',
+    'partner': 'Partner-level = client relationships matter',
     'engineer': 'Engineers wield AI as a tool',
     'developer': 'Architecture still needs humans',
     'surgeon': 'Physical precision + liability = protected',
@@ -109,7 +114,10 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'insurance': 'Claims processing 90% automatable',
     'banking': 'AI doing loans, fraud, trading',
     'finance': 'Quant funds + AI advisors eating market share',
-    'legal': 'AI contract review 10x faster than associates'
+    'financial': 'Financial services: AI handling analysis & trading',
+    'legal': 'AI contract review 10x faster than associates',
+    'consulting': 'AI automating analysis & slide decks',
+    'accounting': 'Accounting tasks 40% automatable'
   }
 
   const lowRiskIndustries: Record<string, string> = {
@@ -193,12 +201,20 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // Clamp score
   score = Math.max(12, Math.min(94, score))
 
-  // Ensure at least one factor on each side if empty
-  if (badFactors.length === 0 && score > 40) {
-    badFactors.push('AI adoption accelerating across all industries')
-  }
-  if (goodFactors.length === 0 && score < 60) {
-    goodFactors.push('No major red flags detected')
+  // Always ensure at least one reason is shown
+  if (badFactors.length === 0 && goodFactors.length === 0) {
+    // Generic factors based on score
+    if (score > 50) {
+      badFactors.push('AI adoption accelerating across all industries')
+      badFactors.push('White-collar jobs most affected (Goldman Sachs)')
+    } else {
+      goodFactors.push('No major automation red flags detected')
+      badFactors.push('General AI pressure affects everyone')
+    }
+  } else if (badFactors.length === 0 && score > 35) {
+    badFactors.push('Broader AI adoption still a factor')
+  } else if (goodFactors.length === 0 && score < 65) {
+    goodFactors.push('Some resilience detected in profile')
   }
 
   return { score, goodFactors, badFactors }
