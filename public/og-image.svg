@@ -1,20 +1,19 @@
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
-  <!-- Cream background matching site -->
+  <!-- Cream background -->
   <rect width="1200" height="630" fill="#F5F5F0"/>
   
-  <!-- DOOMCHECK logo -->
-  <text x="600" y="150" font-family="Arial, sans-serif" font-size="42" font-weight="bold" text-anchor="middle">
-    <tspan>😬 </tspan><tspan fill="#1a1a1a">DOOM</tspan><tspan fill="#FF6B00">CHECK</tspan>
+  <!-- DOOMCHECK logo - no emoji, just text -->
+  <text x="600" y="150" font-family="Arial Black, Arial, sans-serif" font-size="48" font-weight="900" text-anchor="middle">
+    <tspan fill="#1a1a1a">DOOM</tspan><tspan fill="#FF6B00">CHECK</tspan>
   </text>
   
   <!-- Main headline -->
-  <text x="600" y="280" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#1a1a1a">ARE YOU</text>
-  <text x="600" y="390" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="#1a1a1a">DOOMED?</text>
+  <text x="600" y="300" font-family="Arial Black, Arial, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#1a1a1a">ARE YOU</text>
+  <text x="600" y="430" font-family="Arial Black, Arial, sans-serif" font-size="120" font-weight="900" text-anchor="middle" fill="#1a1a1a">DOOMED?</text>
   
   <!-- Subtext -->
-  <text x="600" y="480" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#666666">Paste your LinkedIn URL. Find out in 10 seconds.</text>
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="32" text-anchor="middle" fill="#666666">Paste your LinkedIn. Find out in 10 seconds.</text>
   
-  <!-- CTA hint -->
-  <rect x="400" y="520" width="400" height="60" rx="4" fill="#1a1a1a"/>
-  <text x="600" y="560" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">CHECK IT →</text>
+  <!-- URL -->
+  <text x="600" y="590" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FF6B00">doomcheck.com</text>
 </svg>
