@@ -60,21 +60,21 @@ export default function Home() {
   
   // Fake recently checked users for social proof
   const recentUsers = [
-    { name: "Sarah Mitchell", img: "https://i.pravatar.cc/100?img=1" },
-    { name: "Michael Chen", img: "https://i.pravatar.cc/100?img=3" },
-    { name: "Emma Rodriguez", img: "https://i.pravatar.cc/100?img=5" },
-    { name: "James Wilson", img: "https://i.pravatar.cc/100?img=8" },
-    { name: "Priya Sharma", img: "https://i.pravatar.cc/100?img=9" },
-    { name: "David Kim", img: "https://i.pravatar.cc/100?img=11" },
-    { name: "Lisa Thompson", img: "https://i.pravatar.cc/100?img=16" },
-    { name: "Carlos Garcia", img: "https://i.pravatar.cc/100?img=12" },
-    { name: "Nina Patel", img: "https://i.pravatar.cc/100?img=20" },
-    { name: "Tom Anderson", img: "https://i.pravatar.cc/100?img=14" },
-    { name: "Sofia Martinez", img: "https://i.pravatar.cc/100?img=23" },
-    { name: "Chris Taylor", img: "https://i.pravatar.cc/100?img=15" },
-    { name: "Anna Kowalski", img: "https://i.pravatar.cc/100?img=25" },
-    { name: "Ryan O'Brien", img: "https://i.pravatar.cc/100?img=17" },
-    { name: "Julia Santos", img: "https://i.pravatar.cc/100?img=26" },
+    { name: "Sarah", img: "https://i.pravatar.cc/100?img=1" },
+    { name: "Michael", img: "https://i.pravatar.cc/100?img=3" },
+    { name: "Emma", img: "https://i.pravatar.cc/100?img=5" },
+    { name: "James", img: "https://i.pravatar.cc/100?img=8" },
+    { name: "Priya", img: "https://i.pravatar.cc/100?img=9" },
+    { name: "David", img: "https://i.pravatar.cc/100?img=11" },
+    { name: "Lisa", img: "https://i.pravatar.cc/100?img=16" },
+    { name: "Carlos", img: "https://i.pravatar.cc/100?img=12" },
+    { name: "Nina", img: "https://i.pravatar.cc/100?img=20" },
+    { name: "Tom", img: "https://i.pravatar.cc/100?img=14" },
+    { name: "Sofia", img: "https://i.pravatar.cc/100?img=23" },
+    { name: "Chris", img: "https://i.pravatar.cc/100?img=15" },
+    { name: "Anna", img: "https://i.pravatar.cc/100?img=25" },
+    { name: "Ryan", img: "https://i.pravatar.cc/100?img=17" },
+    { name: "Julia", img: "https://i.pravatar.cc/100?img=26" },
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
