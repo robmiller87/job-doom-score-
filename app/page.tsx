@@ -10,12 +10,44 @@ interface AnalysisResult {
   headline: string | null
 }
 
-function getResult(score: number): { emoji: string; message: string } {
-  if (score <= 35) return { emoji: "😌", message: "You might survive. Maybe." }
-  if (score <= 50) return { emoji: "😰", message: "Start paying attention." }
-  if (score <= 65) return { emoji: "😬", message: "Time to adapt." }
-  if (score <= 80) return { emoji: "🚨", message: "AI is coming for you." }
-  return { emoji: "💀", message: "It was nice knowing you." }
+interface TierResult {
+  tier: string
+  emoji: string
+  message: string
+  color: string
+}
+
+function getTier(score: number): TierResult {
+  if (score <= 20) return { 
+    tier: "SAFE", 
+    emoji: "😎", 
+    message: "The robots work for you.",
+    color: "text-green-600"
+  }
+  if (score <= 40) return { 
+    tier: "UNCERTAIN", 
+    emoji: "😌", 
+    message: "You might survive. Maybe.",
+    color: "text-yellow-600"
+  }
+  if (score <= 60) return { 
+    tier: "NERVOUS", 
+    emoji: "😬", 
+    message: "Time to adapt.",
+    color: "text-orange-500"
+  }
+  if (score <= 80) return { 
+    tier: "IN DANGER", 
+    emoji: "🚨", 
+    message: "AI is coming for you.",
+    color: "text-red-500"
+  }
+  return { 
+    tier: "DOOMED", 
+    emoji: "💀", 
+    message: "Update your resume. Now.",
+    color: "text-red-700"
+  }
 }
 
 export default function Home() {
@@ -56,8 +88,8 @@ export default function Home() {
 
   const shareTwitter = () => {
     if (!result) return
-    const { message } = getResult(result.score)
-    const text = encodeURIComponent(`I'm ${result.score}% doomed by AI 💀\n\n"${message}"\n\nCheck your doom score:`)
+    const { tier, message } = getTier(result.score)
+    const text = encodeURIComponent(`My AI doom status: ${tier} 💀\n\n"${message}"\n\nCheck yours:`)
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
@@ -78,46 +110,38 @@ export default function Home() {
         <div className="text-center">
           <div className="text-6xl mb-6 animate-pulse">🔍</div>
           <h2 className="text-2xl font-black text-black mb-2">ANALYZING PROFILE...</h2>
-          <p className="text-gray-600">Reading job title, industry, experience...</p>
+          <p className="text-gray-600">Scanning your career for AI vulnerability...</p>
         </div>
       </main>
     )
   }
 
   if (step === "result" && result) {
-    const { emoji, message } = getResult(result.score)
+    const { tier, emoji, message, color } = getTier(result.score)
     
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
         <div className="max-w-lg w-full text-center">
           <h1 className="text-4xl md:text-5xl font-black text-black mb-6 tracking-tight">
-            YOUR DOOM SCORE
+            YOUR DOOM STATUS
           </h1>
           
-          {result.profilePic && (
-            <img 
-              src={result.profilePic} 
-              alt="Profile" 
-              className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-black"
-            />
-          )}
-          
           {result.name && (
-            <p className="text-gray-600 mb-2">{result.name}</p>
+            <p className="text-xl font-semibold text-black mb-1">{result.name}</p>
           )}
           
           {result.headline && (
             <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{result.headline}</p>
           )}
           
-          <div className="text-8xl mb-2">{emoji}</div>
-          <div className="text-7xl font-black text-black mb-2">{result.score}%</div>
-          <p className="text-xl text-gray-700 mb-6">"{message}"</p>
+          <div className="text-8xl mb-4">{emoji}</div>
+          <div className={`text-5xl md:text-6xl font-black mb-2 ${color}`}>{tier}</div>
+          <p className="text-xl text-gray-700 mb-8">"{message}"</p>
 
           {result.factors && result.factors.length > 0 && (
-            <div className="bg-white border-2 border-black p-4 mb-6 text-left max-w-sm mx-auto">
+            <div className="bg-white border-2 border-black p-4 mb-8 text-left max-w-sm mx-auto">
               <p className="font-bold text-sm uppercase tracking-wider mb-2">Why:</p>
-              <ul className="text-sm text-gray-700 space-y-1">
+              <ul className="text-sm text-gray-700 space-y-2">
                 {result.factors.map((factor, i) => (
                   <li key={i}>• {factor}</li>
                 ))}
