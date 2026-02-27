@@ -256,16 +256,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Could not fetch profile' }, { status: 500 })
     }
 
-    const profile = await response.json()
+    const rawResponse = await response.json()
     
-    // DEBUG: Log full profile structure
-    console.log('PILOTERR FULL RESPONSE KEYS:', Object.keys(profile))
+    // Piloterr wraps data in "profile" key
+    const profile = rawResponse.profile || rawResponse
+    
+    // DEBUG: Log structure
+    console.log('RAW KEYS:', Object.keys(rawResponse))
+    console.log('PROFILE KEYS:', Object.keys(profile))
     console.log('HEADLINE:', profile.headline)
-    console.log('EXPERIENCES:', JSON.stringify(profile.experiences?.slice(0, 2), null, 2))
-    console.log('POSITION:', JSON.stringify(profile.position, null, 2))
-    console.log('CURRENT_COMPANY:', profile.current_company)
+    console.log('EXP[0]:', JSON.stringify(profile.experiences?.[0], null, 2))
     
-    if (profile.error) {
+    if (rawResponse.error || profile.error) {
       return NextResponse.json({ error: 'Profile is private or unavailable' }, { status: 400 })
     }
 
