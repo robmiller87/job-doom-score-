@@ -2,12 +2,12 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Are You Doomed? | AI Job Risk Calculator",
-  description: "300 million jobs will be affected by AI. Is yours one of them? Paste your LinkedIn and find out in 10 seconds.",
+  title: "Are You Cooked? | AI Job Risk Calculator",
+  description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
   metadataBase: new URL('https://doomcheck.com'),
   openGraph: {
-    title: "Are You Doomed? | AI Job Risk Calculator",
-    description: "300 million jobs will be affected by AI. Is yours one of them? Paste your LinkedIn and find out in 10 seconds.",
+    title: "Are You Cooked? | AI Job Risk Calculator",
+    description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
     type: "website",
     siteName: "DoomCheck",
     images: [
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Are You Doomed?",
-    description: "300 million jobs will be affected by AI. Is yours one of them?",
+    title: "Are You Cooked?",
+    description: "Find out if AI is coming for your job. Takes 5 seconds.",
     images: ["/og-image.png"],
   },
 }
