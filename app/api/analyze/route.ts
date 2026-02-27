@@ -26,8 +26,14 @@ PROFILE DATA:
 - Followers: ${profile.follower_count || 0}
 - Industry: ${profile.industry || 'Unknown'}
 
-JOB TITLES FROM EXPERIENCE:
-${(profile.experiences || []).slice(0, 5).map((e: any) => `- ${e.title || e.position || e.role || 'Unknown'} at ${e.company || e.company_name || 'Unknown'}`).join('\n') || 'None listed'}
+COMPANIES WORKED AT (no job titles available from data source):
+${(profile.experiences || []).slice(0, 8).map((e: any) => `- ${e.company || e.name || 'Unknown company'}`).join('\n') || 'None listed'}
+
+INFERENCE HINTS:
+- Big tech (Google, Meta, Amazon) = likely employee
+- Banks/Consulting (Goldman, McKinsey) = likely employee  
+- Small agency/consultancy name = likely owner/partner
+- Company with person's own name = likely owner
 
 SCORING GUIDELINES:
 - 0-20 (SAFE): Founders, CEOs, investors, capital allocators, people with massive followings (50K+), business owners, people who run their own company/newsletter/media
