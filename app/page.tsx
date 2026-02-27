@@ -110,17 +110,20 @@ export default function Home() {
     if (!result) return
     const { tier, emoji } = getTier(result.score)
     
-    if (navigator.share) {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
         await navigator.share({
           title: `I'm ${tier} ${emoji}`,
           text: `My AI Doom Score: ${result.score}/100\n\n"${result.roast}"\n\nCheck yours:`,
           url: 'https://doomcheck.com'
         })
+        return
       } catch (e) {
-        // User cancelled
+        // User cancelled or share failed, fall through to Twitter
       }
     }
+    // Fallback to Twitter
+    shareTwitter()
   }
 
   const copyLink = async () => {
@@ -241,15 +244,13 @@ export default function Home() {
 
           {/* Share buttons */}
           <div className="space-y-3 mb-4">
-            {/* Primary share - Native on mobile, Twitter on desktop */}
-            {typeof window !== 'undefined' && navigator.share ? (
-              <button
-                onClick={shareNative}
-                className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-4 rounded-xl font-bold text-lg hover:opacity-90 transition flex items-center justify-center gap-2"
-              >
-                📤 SHARE YOUR DOOM
-              </button>
-            ) : null}
+            {/* Primary share - Native on mobile */}
+            <button
+              onClick={shareNative}
+              className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 px-4 rounded-xl font-bold text-lg hover:opacity-90 transition flex items-center justify-center gap-2"
+            >
+              📤 SHARE YOUR DOOM
+            </button>
             
             <div className="flex gap-3">
               <button
