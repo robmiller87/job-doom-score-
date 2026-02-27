@@ -42,7 +42,16 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'customer service': '80% of interactions going to bots',
     'marketing': 'AI handles targeting, copy, and optimization',
     'hr ': 'AI screening resumes, scheduling, interviewing',
-    'recruiter': 'AI sourcing up 300%, fewer recruiters needed'
+    'recruiter': 'AI sourcing up 300%, fewer recruiters needed',
+    'operations': 'Operations: AI automating workflows & reporting',
+    'sales op': 'Sales ops: CRM + AI forecasting reducing headcount',
+    'business analyst': 'AI doing analysis faster than humans',
+    'project manager': 'AI project tools automating coordination',
+    'product manager': 'AI handling roadmaps, specs, prioritization',
+    'consultant': 'AI automating analysis & recommendations',
+    'writer': 'AI content generation is mainstream',
+    'editor': 'AI editing & proofreading tools everywhere',
+    'designer': 'AI design tools (Midjourney, Figma AI) disrupting'
   }
 
   const lowRiskTitles: Record<string, string> = {
@@ -203,10 +212,21 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
 
   // Always ensure BOTH boxes have content
   if (badFactors.length === 0) {
-    badFactors.push('AI adoption accelerating across all industries')
+    // More specific fallbacks based on score
+    if (score > 50) {
+      badFactors.push('Your role type is in AI\'s crosshairs')
+    } else if (score > 30) {
+      badFactors.push('AI tools entering your workflow soon')
+    } else {
+      badFactors.push('No industry is fully immune to AI')
+    }
   }
   if (goodFactors.length === 0) {
-    goodFactors.push('No major red flags in your profile')
+    if (score < 40) {
+      goodFactors.push('Your profile shows resilience markers')
+    } else {
+      goodFactors.push('Adaptability will be key')
+    }
   }
 
   return { score, goodFactors, badFactors }
