@@ -223,8 +223,13 @@ export async function POST(request: NextRequest) {
   try {
     const { linkedinUrl } = await request.json()
 
-    if (!linkedinUrl || !linkedinUrl.includes('linkedin.com')) {
-      return NextResponse.json({ error: 'Invalid LinkedIn URL' }, { status: 400 })
+    if (!linkedinUrl || !linkedinUrl.includes('linkedin.com/in/')) {
+      return NextResponse.json({ error: 'Please enter a valid LinkedIn profile URL (linkedin.com/in/username)' }, { status: 400 })
+    }
+    
+    // Check for malformed URLs (double https, etc)
+    if ((linkedinUrl.match(/https?:\/\//g) || []).length > 1) {
+      return NextResponse.json({ error: 'URL looks malformed - please paste only one LinkedIn URL' }, { status: 400 })
     }
 
     if (!PILOTERR_API_KEY) {
