@@ -324,10 +324,19 @@ export default function Home() {
     <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
       <div className="max-w-2xl w-full text-center">
         {/* Logo */}
-        <div className="flex items-center justify-center gap-2 mb-8">
+        <div className="flex items-center justify-center gap-2 mb-4">
           <span className="text-3xl">😬</span>
           <span className="text-2xl font-black tracking-tight text-black">DOOM<span className="text-orange-500">CHECK</span></span>
         </div>
+
+        <a 
+          href="https://technologymagazine.com/ai-and-machine-learning/375mn-jobs-be-displaced-automation-2030-mckinsey"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-xs text-gray-500 hover:text-gray-700 underline mb-6"
+        >
+          McKinsey: 375 million workers may need to change jobs by 2030 →
+        </a>
 
         <h1 className="text-5xl md:text-7xl font-black text-black mb-6 tracking-tight">
           ARE YOU DOOMED?
