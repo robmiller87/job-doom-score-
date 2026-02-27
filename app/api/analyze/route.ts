@@ -91,6 +91,13 @@ STRICT RULES (FOLLOW EXACTLY):
    - Founder/CEO alone = SAFE
    - These override any negatives
 
+ANTI-HALLUCINATION RULES (CRITICAL):
+- ONLY cite facts explicitly present in the PROFILE DATA section above
+- If Followers shows 0 or a low number, do NOT mention followers as a factor
+- If you don't see explicit evidence of something, don't claim it
+- "50K+ followers" is only valid if the Followers field actually shows 50000+
+- Never assume or invent facts not in the data
+
 Return ONLY valid JSON in this exact format:
 {
   "score": <number 0-100>,
@@ -98,7 +105,7 @@ Return ONLY valid JSON in this exact format:
   "badFactors": ["<factor 1>", "<factor 2>"]
 }
 
-Be concise (under 10 words each factor).`
+Be concise (under 10 words each factor). Only cite verifiable facts from the profile.`
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
