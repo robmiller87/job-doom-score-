@@ -257,10 +257,12 @@ export async function POST(request: NextRequest) {
                      profile.firstName || null
     const firstName = fullName?.split(' ')[0] || null
 
-    // Log experience data separately for visibility
+    // Log experience data + all available keys
     const exp0 = profile.experiences?.[0]
-    console.log('EXPERIENCE_CHECK:', exp0?.title || exp0?.position || 'NO_TITLE', 'at', exp0?.company || 'NO_COMPANY')
-    console.log('Profile:', fullName, 'Score:', analysis.score, 'ExpCount:', profile.experiences?.length || 0)
+    console.log('EXP_KEYS:', exp0 ? Object.keys(exp0).join(',') : 'NO_EXP')
+    console.log('EXP_TITLE:', exp0?.title || exp0?.position || exp0?.role || exp0?.job_title || 'NONE')
+    console.log('OCCUPATION:', profile.occupation || 'NONE')
+    console.log('Profile:', fullName, 'Score:', analysis.score)
 
     return NextResponse.json({
       score: analysis.score,
