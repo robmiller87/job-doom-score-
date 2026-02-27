@@ -374,18 +374,18 @@ export default function Home() {
         <div className="w-full max-w-xl mx-auto mb-6 overflow-hidden">
           <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">Recently Checked</p>
           <div className="relative">
-            <div className="flex animate-scroll gap-3">
+            <div className="flex animate-scroll gap-2">
               {[...recentUsers, ...recentUsers].map((user, i) => (
                 <div 
                   key={i}
-                  className="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5 whitespace-nowrap"
+                  className="flex-shrink-0"
+                  title={user.name}
                 >
                   <img 
                     src={user.img} 
                     alt={user.name}
-                    className="w-6 h-6 rounded-full object-cover"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
                   />
-                  <span className="text-sm text-gray-600">{user.name}</span>
                 </div>
               ))}
             </div>
