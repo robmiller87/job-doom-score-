@@ -57,6 +57,10 @@ export default function Home() {
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const [error, setError] = useState("")
   const [checkedCount] = useState(2500)
+  const [showFeedback, setShowFeedback] = useState(false)
+  const [feedbackText, setFeedbackText] = useState("")
+  const [feedbackEmail, setFeedbackEmail] = useState("")
+  const [feedbackSent, setFeedbackSent] = useState(false)
   
   // Fake recently checked users for social proof
   const recentUsers = [
@@ -210,6 +214,83 @@ export default function Home() {
           >
             Check another profile
           </button>
+
+          <div className="mt-4">
+            <button
+              onClick={() => setShowFeedback(true)}
+              className="text-gray-400 hover:text-gray-600 text-xs underline"
+            >
+              Disagree? Tell us why →
+            </button>
+          </div>
+
+          {/* Feedback Modal */}
+          {showFeedback && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+              <div className="bg-white rounded-lg p-6 max-w-md w-full">
+                {feedbackSent ? (
+                  <div className="text-center">
+                    <div className="text-4xl mb-4">🙏</div>
+                    <h3 className="text-xl font-bold mb-2">Thanks for the feedback!</h3>
+                    <p className="text-gray-600 mb-4">We'll use this to improve our scoring.</p>
+                    <button
+                      onClick={() => { setShowFeedback(false); setFeedbackSent(false); }}
+                      className="bg-black text-white px-6 py-2 font-bold"
+                    >
+                      Close
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <h3 className="text-xl font-bold mb-4">Think we got it wrong?</h3>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Help us improve. What tier should {result?.name || 'this person'} actually be?
+                    </p>
+                    <textarea
+                      value={feedbackText}
+                      onChange={(e) => setFeedbackText(e.target.value)}
+                      placeholder="e.g., Should be SAFE because they own their own business..."
+                      className="w-full border-2 border-gray-200 p-3 text-sm mb-3 h-24 resize-none focus:outline-none focus:border-black"
+                    />
+                    <input
+                      type="email"
+                      value={feedbackEmail}
+                      onChange={(e) => setFeedbackEmail(e.target.value)}
+                      placeholder="Email (optional) — get notified when we improve"
+                      className="w-full border-2 border-gray-200 p-3 text-sm mb-4 focus:outline-none focus:border-black"
+                    />
+                    <div className="flex gap-3">
+                      <button
+                        onClick={() => setShowFeedback(false)}
+                        className="flex-1 border-2 border-black px-4 py-2 font-bold hover:bg-gray-100"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={async () => {
+                          // For now, log to console - could send to API/sheet later
+                          console.log('Feedback:', { 
+                            name: result?.name,
+                            score: result?.score,
+                            feedback: feedbackText, 
+                            email: feedbackEmail,
+                            url: url 
+                          });
+                          setFeedbackSent(true);
+                          setFeedbackText("");
+                          setFeedbackEmail("");
+                        }}
+                        disabled={!feedbackText.trim()}
+                        className="flex-1 bg-black text-white px-4 py-2 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </main>
     )
