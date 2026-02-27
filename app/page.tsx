@@ -59,9 +59,21 @@ export default function Home() {
   
   // Fake recently checked users for social proof
   const recentUsers = [
-    "sarah.k", "mike.chen", "emma.jones", "raj.patel", "lisa.m",
-    "tom.wilson", "ana.garcia", "james.lee", "sofia.r", "david.kim",
-    "maria.santos", "chris.taylor", "nina.w", "alex.brown", "julia.h"
+    { name: "Sarah Mitchell", img: "https://i.pravatar.cc/100?img=1" },
+    { name: "Michael Chen", img: "https://i.pravatar.cc/100?img=3" },
+    { name: "Emma Rodriguez", img: "https://i.pravatar.cc/100?img=5" },
+    { name: "James Wilson", img: "https://i.pravatar.cc/100?img=8" },
+    { name: "Priya Sharma", img: "https://i.pravatar.cc/100?img=9" },
+    { name: "David Kim", img: "https://i.pravatar.cc/100?img=11" },
+    { name: "Lisa Thompson", img: "https://i.pravatar.cc/100?img=16" },
+    { name: "Carlos Garcia", img: "https://i.pravatar.cc/100?img=12" },
+    { name: "Nina Patel", img: "https://i.pravatar.cc/100?img=20" },
+    { name: "Tom Anderson", img: "https://i.pravatar.cc/100?img=14" },
+    { name: "Sofia Martinez", img: "https://i.pravatar.cc/100?img=23" },
+    { name: "Chris Taylor", img: "https://i.pravatar.cc/100?img=15" },
+    { name: "Anna Kowalski", img: "https://i.pravatar.cc/100?img=25" },
+    { name: "Ryan O'Brien", img: "https://i.pravatar.cc/100?img=17" },
+    { name: "Julia Santos", img: "https://i.pravatar.cc/100?img=26" },
   ]
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -239,8 +251,12 @@ export default function Home() {
                   key={i}
                   className="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-3 py-1.5 whitespace-nowrap"
                 >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-gray-300 to-gray-400" />
-                  <span className="text-sm text-gray-600">@{user}</span>
+                  <img 
+                    src={user.img} 
+                    alt={user.name}
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
+                  <span className="text-sm text-gray-600">{user.name}</span>
                 </div>
               ))}
             </div>
