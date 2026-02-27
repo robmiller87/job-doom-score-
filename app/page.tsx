@@ -109,13 +109,16 @@ export default function Home() {
   const shareNative = async () => {
     if (!result) return
     const { tier, emoji } = getTier(result.score)
+    const shareText = `My AI Doom Score: ${result.score}/100 ${emoji}
+
+"${result.roast}"
+
+Check yours: https://doomcheck.com`
     
     if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
       try {
         await navigator.share({
-          title: `I'm ${tier} ${emoji}`,
-          text: `My AI Doom Score: ${result.score}/100\n\n"${result.roast}"\n\nCheck yours:`,
-          url: 'https://doomcheck.com'
+          text: shareText
         })
         return
       } catch (e) {
