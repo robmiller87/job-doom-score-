@@ -30,19 +30,24 @@ JOB TITLES FROM EXPERIENCE:
 ${(profile.experiences || []).slice(0, 5).map((e: any) => `- ${e.title} at ${e.company}`).join('\n') || 'None listed'}
 
 SCORING GUIDELINES:
-- 0-20 (SAFE): Founders, CEOs, investors, capital allocators, people with massive followings, owners
+- 0-20 (SAFE): Founders, CEOs, investors, capital allocators, people with massive followings (50K+), business owners, people who run their own company/newsletter/media
 - 21-40 (UNCERTAIN): Senior leadership, specialized experts, people with strong networks
 - 41-60 (NERVOUS): Mid-level employees, generalists, roles being augmented by AI
 - 61-80 (IN DANGER): Junior roles, administrative work, easily automatable tasks
 - 81-100 (DOOMED): Data entry, basic customer support, routine clerical work
 
-KEY FACTORS:
-- Founders/entrepreneurs are SAFE - they pivot, not get replaced
-- Massive followers (100K+) = distribution moat = safer
-- Software engineers are at MEDIUM risk - market flooded + AI coding tools
+KEY OWNERSHIP SIGNALS (these people are SAFE, score 0-20):
+- If their headline mentions THEIR OWN website/newsletter/company (e.g., "join our newsletter at mycompany.com") = they likely OWN it = SAFE
+- If job title includes: Founder, Co-founder, CEO, Owner, Managing Partner, GP, Chairman = SAFE
+- If they have 50K+ followers = significant personal brand = SAFE
+- If they're in crypto/web3 with leadership role = likely early/owner = SAFE
+
+KEY RISK FACTORS:
+- Software engineers are at MEDIUM risk (score 45-55) - market flooded + AI coding tools, but still needed
 - CMOs/Marketing leads are at HIGH risk - AI automating marketing
+- Junior/entry-level roles are HIGH risk
 - Physical trades (plumber, electrician) are SAFE - robots can't do it yet
-- Experience and seniority help but don't make you immune
+- Administrative/clerical work is DOOMED
 
 Return ONLY valid JSON in this exact format:
 {
