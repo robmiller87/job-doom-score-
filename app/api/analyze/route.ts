@@ -144,8 +144,22 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'software engineer': 'SWE market flooded + Copilot eating junior roles',
     'software developer': 'SWE market saturated + AI coding tools',
     'frontend developer': 'Frontend: AI generating UI code',
+    'frontend engineer': 'Frontend: AI generating UI code',
+    'backend developer': 'Backend roles: AI-assisted coding accelerating',
     'full stack': 'Full stack market competitive + AI assistants',
+    'fullstack': 'Full stack market competitive + AI assistants',
+    'web developer': 'Web dev: AI generating code faster than humans',
+    'mobile developer': 'Mobile dev: AI building apps from prompts',
+    'ios developer': 'iOS dev: AI tools writing Swift code',
+    'android developer': 'Android dev: AI coding assistants everywhere',
+    'react developer': 'React dev: AI generating components',
+    'node developer': 'Node dev: Copilot writing server code',
+    'python developer': 'Python dev: AI coding tools dominating',
+    'java developer': 'Java dev: Enterprise code increasingly AI-generated',
     'programmer': 'Coding increasingly AI-assisted',
+    'coder': 'Coding increasingly AI-assisted',
+    'developer': 'Developer market: AI assistants changing everything',
+    'engineer': 'Engineering roles: AI tools entering workflow',
   }
 
   if (!titleFound) {
