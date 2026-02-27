@@ -162,36 +162,36 @@ export default function Home() {
     const { tier, emoji, message, color } = getTier(result.score)
     
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
+      <main className="min-h-screen flex flex-col items-center justify-center p-4 md:p-6 bg-[#f5f5f0]">
         <div className="max-w-lg w-full text-center">
           {/* Logo */}
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <span className="text-2xl">😬</span>
-            <span className="text-xl font-black tracking-tight text-black">DOOM<span className="text-orange-500">CHECK</span></span>
+          <div className="flex items-center justify-center gap-2 mb-3 md:mb-6">
+            <span className="text-xl md:text-2xl">😬</span>
+            <span className="text-lg md:text-xl font-black tracking-tight text-black">DOOM<span className="text-orange-500">CHECK</span></span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-black text-black mb-6 tracking-tight">
+          <h1 className="text-2xl md:text-5xl font-black text-black mb-2 md:mb-6 tracking-tight">
             YOUR DOOM STATUS
           </h1>
           
           {result.name && (
-            <p className="text-xl font-semibold text-black mb-1">{result.name}</p>
+            <p className="text-lg md:text-xl font-semibold text-black mb-0.5">{result.name}</p>
           )}
           
           {result.headline && (
-            <p className="text-sm text-gray-500 mb-6 max-w-sm mx-auto">{result.headline}</p>
+            <p className="text-xs md:text-sm text-gray-500 mb-3 md:mb-6 max-w-sm mx-auto">{result.headline}</p>
           )}
           
-          <div className="text-8xl mb-4">{emoji}</div>
-          <div className={`text-5xl md:text-6xl font-black mb-2 ${color}`}>{tier}</div>
-          <p className="text-xl text-gray-700 mb-8">"{message}"</p>
+          <div className="text-6xl md:text-8xl mb-2 md:mb-4">{emoji}</div>
+          <div className={`text-4xl md:text-6xl font-black mb-1 md:mb-2 ${color}`}>{tier}</div>
+          <p className="text-lg md:text-xl text-gray-700 mb-4 md:mb-8">"{message}"</p>
 
           {(result.goodFactors?.length > 0 || result.badFactors?.length > 0) && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mb-4 md:mb-8 max-w-2xl mx-auto">
               {result.badFactors?.length > 0 && (
-                <div className="bg-red-50 border-2 border-red-200 p-4 text-left">
-                  <p className="font-bold text-sm uppercase tracking-wider mb-2 text-red-700">⚠️ Working Against You</p>
-                  <ul className="text-sm text-gray-700 space-y-2">
+                <div className="bg-red-50 border-2 border-red-200 p-3 md:p-4 text-left">
+                  <p className="font-bold text-xs md:text-sm uppercase tracking-wider mb-1 md:mb-2 text-red-700">⚠️ Working Against You</p>
+                  <ul className="text-xs md:text-sm text-gray-700 space-y-1 md:space-y-2">
                     {result.badFactors.map((factor, i) => (
                       <li key={i}>• {factor}</li>
                     ))}
@@ -199,9 +199,9 @@ export default function Home() {
                 </div>
               )}
               {result.goodFactors?.length > 0 && (
-                <div className="bg-green-50 border-2 border-green-200 p-4 text-left">
-                  <p className="font-bold text-sm uppercase tracking-wider mb-2 text-green-700">✅ Working For You</p>
-                  <ul className="text-sm text-gray-700 space-y-2">
+                <div className="bg-green-50 border-2 border-green-200 p-3 md:p-4 text-left">
+                  <p className="font-bold text-xs md:text-sm uppercase tracking-wider mb-1 md:mb-2 text-green-700">✅ Working For You</p>
+                  <ul className="text-xs md:text-sm text-gray-700 space-y-1 md:space-y-2">
                     {result.goodFactors.map((factor, i) => (
                       <li key={i}>• {factor}</li>
                     ))}
@@ -211,16 +211,16 @@ export default function Home() {
             </div>
           )}
 
-          <div className="flex gap-3 justify-center mb-6">
+          <div className="flex gap-2 md:gap-3 justify-center mb-4 md:mb-6">
             <button
               onClick={shareTwitter}
-              className="bg-black text-white px-6 py-3 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors text-sm"
+              className="bg-black text-white px-4 md:px-6 py-2 md:py-3 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors text-xs md:text-sm"
             >
               Share on X
             </button>
             <button
               onClick={shareLinkedIn}
-              className="bg-[#0077b5] text-white px-6 py-3 font-bold uppercase tracking-wider hover:bg-[#006699] transition-colors text-sm"
+              className="bg-[#0077b5] text-white px-4 md:px-6 py-2 md:py-3 font-bold uppercase tracking-wider hover:bg-[#006699] transition-colors text-xs md:text-sm"
             >
               Share on LinkedIn
             </button>
