@@ -10,6 +10,7 @@ export const metadata: Metadata = {
     description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
     type: "website",
     siteName: "DoomCheck",
+    url: "https://doomcheck.com",
     images: [
       {
         url: "/og-image.png?v=2",
