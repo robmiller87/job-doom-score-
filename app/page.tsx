@@ -129,6 +129,12 @@ export default function Home() {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
         <div className="max-w-lg w-full text-center">
+          {/* Logo */}
+          <div className="flex items-center justify-center gap-2 mb-6">
+            <span className="text-2xl">😬</span>
+            <span className="text-xl font-black tracking-tight text-black">DOOM<span className="text-orange-500">CHECK</span></span>
+          </div>
+
           <h1 className="text-4xl md:text-5xl font-black text-black mb-6 tracking-tight">
             YOUR DOOM STATUS
           </h1>
@@ -185,6 +191,12 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
       <div className="max-w-2xl w-full text-center">
+        {/* Logo */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <span className="text-3xl">😬</span>
+          <span className="text-2xl font-black tracking-tight text-black">DOOM<span className="text-orange-500">CHECK</span></span>
+        </div>
+
         <h1 className="text-5xl md:text-7xl font-black text-black mb-6 tracking-tight">
           ARE YOU DOOMED?
         </h1>
