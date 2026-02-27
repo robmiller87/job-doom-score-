@@ -4,16 +4,16 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Are You Cooked? | AI Job Risk Calculator",
   description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
-  metadataBase: new URL('https://doomcheck.com'),
+  metadataBase: new URL('https://www.doomcheck.com'),
   openGraph: {
     title: "Are You Cooked? | AI Job Risk Calculator",
     description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
     type: "website",
     siteName: "DoomCheck",
-    url: "https://doomcheck.com",
+    url: "https://www.doomcheck.com",
     images: [
       {
-        url: "/og-image.png?v=2",
+        url: "https://www.doomcheck.com/og-image.png?v=3",
         width: 1200,
         height: 630,
         alt: "DoomCheck - Are You Cooked?",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Are You Cooked?",
     description: "Find out if AI is coming for your job. Takes 5 seconds.",
-    images: ["/og-image.png?v=2"],
+    images: ["https://www.doomcheck.com/og-image.png?v=3"],
   },
 }
 
