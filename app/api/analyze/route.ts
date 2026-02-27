@@ -75,7 +75,10 @@ STRICT RULES (FOLLOW EXACTLY):
 5. For goodFactors: explain WHY protected (e.g., "10 years = institutional knowledge")
 6. If Current Title is "Founder" or "CEO" or "Owner" → SAFE (score 0-20)
 7. If company name sounds like a small agency/consultancy (contains "PR", "Marketing", "Consulting", "Solutions", "Partners", "Group", "Advisors", or their own name) and they're senior → likely owner = SAFE
-8. If experience data is missing/incomplete, infer from headline and company - don't assume the worst
+8. IMPORTANT: Job titles are NOT provided - you MUST infer the person's role from their HEADLINE
+9. If headline says "Founder", "CEO", "Owner", "Managing Partner" = they are SAFE
+10. If headline says "Software Engineer", "Developer", "Designer" = they are NERVOUS
+11. If headline only shows company name, check if company sounds like small agency = likely owner
 9. Prioritize the protective signals - if someone has 1 founder signal, weight it heavily
 
 Return ONLY valid JSON in this exact format:
