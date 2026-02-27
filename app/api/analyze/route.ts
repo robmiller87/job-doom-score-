@@ -201,20 +201,12 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // Clamp score
   score = Math.max(12, Math.min(94, score))
 
-  // Always ensure at least one reason is shown
-  if (badFactors.length === 0 && goodFactors.length === 0) {
-    // Generic factors based on score
-    if (score > 50) {
-      badFactors.push('AI adoption accelerating across all industries')
-      badFactors.push('White-collar jobs most affected (Goldman Sachs)')
-    } else {
-      goodFactors.push('No major automation red flags detected')
-      badFactors.push('General AI pressure affects everyone')
-    }
-  } else if (badFactors.length === 0 && score > 35) {
-    badFactors.push('Broader AI adoption still a factor')
-  } else if (goodFactors.length === 0 && score < 65) {
-    goodFactors.push('Some resilience detected in profile')
+  // Always ensure BOTH boxes have content
+  if (badFactors.length === 0) {
+    badFactors.push('AI adoption accelerating across all industries')
+  }
+  if (goodFactors.length === 0) {
+    goodFactors.push('No major red flags in your profile')
   }
 
   return { score, goodFactors, badFactors }
