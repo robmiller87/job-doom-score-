@@ -259,9 +259,7 @@ export async function POST(request: NextRequest) {
 
     // Log experience data + all available keys
     const exp0 = profile.experiences?.[0]
-    console.log('EXP_KEYS:', exp0 ? Object.keys(exp0).join(',') : 'NO_EXP')
-    console.log('EXP_TITLE:', exp0?.title || exp0?.position || exp0?.role || exp0?.job_title || 'NONE')
-    console.log('OCCUPATION:', profile.occupation || 'NONE')
+    console.log('PROFILE_KEYS:', Object.keys(profile).join(','))
     console.log('Profile:', fullName, 'Score:', analysis.score)
 
     return NextResponse.json({
