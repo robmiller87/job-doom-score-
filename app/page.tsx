@@ -117,7 +117,25 @@ export default function Home() {
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
-  const shareLinkedIn = () => {
+  const shareLinkedIn = async () => {
+    const { tier, message } = getTier(result?.score || 50)
+    const shareText = `My AI doom status: ${tier}\n\n"${message}"\n\n300M jobs at risk. Is yours one of them?`
+    
+    // Use native share on mobile if available
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'DoomCheck - AI Job Risk Calculator',
+          text: shareText,
+          url: window.location.origin
+        })
+        return
+      } catch (e) {
+        // User cancelled or error - fall through to LinkedIn URL
+      }
+    }
+    
+    // Fallback to LinkedIn URL
     window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
