@@ -55,6 +55,12 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   }
 
   const lowRiskTitles: Record<string, string> = {
+    'co-founder': 'You built companies, you\'ll build more',
+    'investor': 'You deploy capital, not labor',
+    'venture': 'VCs fund AI, not fear it',
+    'partner at': 'Partner-level = equity, not salary',
+    'board member': 'Governance roles need human judgment',
+    'chairman': 'You own the board, not a desk',
     'director': 'Strategic decisions still need humans',
     'vp': 'Relationship-driven, harder to automate',
     'chief': 'Accountability requires human judgment',
@@ -188,9 +194,18 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     badFactors.push('Early career = more replaceable')
   }
 
-  // Follower count (influence = safety)
+  // Follower count (influence = safety) - MAJOR factor
   const followers = profile.follower_count || 0
-  if (followers > 10000) {
+  if (followers > 500000) {
+    score -= 35
+    goodFactors.push(`${followers.toLocaleString()} followers = you ARE the media`)
+  } else if (followers > 100000) {
+    score -= 25
+    goodFactors.push(`${followers.toLocaleString()} followers = massive distribution moat`)
+  } else if (followers > 50000) {
+    score -= 15
+    goodFactors.push(`${followers.toLocaleString()} followers = strong personal brand`)
+  } else if (followers > 10000) {
     score -= 8
     goodFactors.push(`${followers.toLocaleString()} followers = personal brand moat`)
   } else if (followers > 5000) {
