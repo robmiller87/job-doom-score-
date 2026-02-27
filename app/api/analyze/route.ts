@@ -258,6 +258,13 @@ export async function POST(request: NextRequest) {
 
     const profile = await response.json()
     
+    // DEBUG: Log full profile structure
+    console.log('PILOTERR FULL RESPONSE KEYS:', Object.keys(profile))
+    console.log('HEADLINE:', profile.headline)
+    console.log('EXPERIENCES:', JSON.stringify(profile.experiences?.slice(0, 2), null, 2))
+    console.log('POSITION:', JSON.stringify(profile.position, null, 2))
+    console.log('CURRENT_COMPANY:', profile.current_company)
+    
     if (profile.error) {
       return NextResponse.json({ error: 'Profile is private or unavailable' }, { status: 400 })
     }
