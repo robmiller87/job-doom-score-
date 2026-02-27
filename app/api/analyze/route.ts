@@ -49,6 +49,13 @@ KEY RISK FACTORS:
 - Physical trades (plumber, electrician) are SAFE - robots can't do it yet
 - Administrative/clerical work is DOOMED
 
+IMPORTANT RULES FOR FACTORS:
+- NEVER say "undefined job title" or "lack of specificity" - these are useless
+- ALWAYS give specific, actionable reasons based on their actual role
+- For badFactors: explain HOW AI threatens their specific job (e.g., "BD roles: AI SDRs automating outreach")
+- For goodFactors: explain WHY they're protected (e.g., "10 years experience = institutional knowledge")
+- If you can't find specific risks, mention industry-wide AI trends for their field
+
 Return ONLY valid JSON in this exact format:
 {
   "score": <number 0-100>,
@@ -56,7 +63,7 @@ Return ONLY valid JSON in this exact format:
   "badFactors": ["<factor 1>", "<factor 2>"]
 }
 
-Make factors specific to THIS person's actual role and situation. Be concise (under 10 words each).`
+Be concise (under 10 words each factor).`
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
