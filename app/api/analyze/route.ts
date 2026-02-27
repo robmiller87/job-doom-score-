@@ -49,12 +49,14 @@ KEY RISK FACTORS:
 - Physical trades (plumber, electrician) are SAFE - robots can't do it yet
 - Administrative/clerical work is DOOMED
 
-IMPORTANT RULES FOR FACTORS:
-- NEVER say "undefined job title" or "lack of specificity" - these are useless
-- ALWAYS give specific, actionable reasons based on their actual role
-- For badFactors: explain HOW AI threatens their specific job (e.g., "BD roles: AI SDRs automating outreach")
-- For goodFactors: explain WHY they're protected (e.g., "10 years experience = institutional knowledge")
-- If you can't find specific risks, mention industry-wide AI trends for their field
+STRICT RULES (FOLLOW EXACTLY):
+1. NEVER use the word "undefined" in any factor - this is BANNED
+2. NEVER say "lack of specificity" or similar vague phrases - BANNED
+3. ALWAYS give specific, concrete reasons based on their actual role
+4. For badFactors: explain HOW AI threatens their job (e.g., "BD: AI SDRs replacing outreach")
+5. For goodFactors: explain WHY protected (e.g., "10 years = institutional knowledge")
+6. If Current Title is "Founder" or "CEO" or "Owner" → they are SAFE (score 0-20)
+7. If they work at a company with their name or a company they seem to own → likely SAFE
 
 Return ONLY valid JSON in this exact format:
 {
