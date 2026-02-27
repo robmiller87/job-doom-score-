@@ -262,12 +262,12 @@ export default function Home() {
                   <>
                     <h3 className="text-xl font-bold mb-4">Think we got it wrong?</h3>
                     <p className="text-gray-600 text-sm mb-4">
-                      Help us improve. What tier should {result?.name || 'this person'} actually be?
+                      What did DoomCheck miss about {result?.name || 'this person'}?
                     </p>
                     <textarea
                       value={feedbackText}
                       onChange={(e) => setFeedbackText(e.target.value)}
-                      placeholder="e.g., Should be SAFE because they own their own business..."
+                      placeholder="e.g., They own their own business, so they're safer than this..."
                       className="w-full border-2 border-gray-200 p-3 text-sm mb-3 h-24 resize-none focus:outline-none focus:border-black"
                     />
                     <input
