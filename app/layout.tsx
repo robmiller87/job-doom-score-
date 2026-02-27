@@ -4,7 +4,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Are You Doomed? | AI Job Risk Calculator",
   description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
-  metadataBase: new URL('https://job-doom-score.vercel.app'),
+  metadataBase: new URL('https://doomcheck.com'),
   openGraph: {
     title: "Are You Doomed? | AI Job Risk Calculator",
     description: "Drop your LinkedIn URL. Find out how doomed you are by AI.",
