@@ -153,10 +153,16 @@ export default function Home() {
   if (step === "analyzing") {
     return (
       <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
-        <div className="text-center">
+        <div className="text-center max-w-sm w-full">
           <div className="text-6xl mb-6 animate-pulse">🔍</div>
           <h2 className="text-2xl font-black text-black mb-2">ANALYZING PROFILE...</h2>
-          <p className="text-gray-600">Scanning your career for AI vulnerability...</p>
+          <p className="text-gray-600 mb-6">Scanning your career for AI vulnerability...</p>
+          
+          {/* Progress bar */}
+          <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+            <div className="bg-orange-500 h-2 rounded-full animate-progress"></div>
+          </div>
+          <p className="text-xs text-gray-400">This takes about 10 seconds</p>
         </div>
       </main>
     )
