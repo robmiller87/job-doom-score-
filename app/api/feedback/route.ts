@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Feedback system unavailable' }, { status: 500 })
     }
 
-    // Forward to Google Sheet
-    await fetch(GOOGLE_SHEET_WEBHOOK, {
+    // Forward to Google Sheet (follow redirects)
+    const response = await fetch(GOOGLE_SHEET_WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -26,8 +26,11 @@ export async function POST(request: NextRequest) {
         feedback: data.feedback,
         email: data.email || '',
         url: data.url || ''
-      })
+      }),
+      redirect: 'follow'
     })
+    
+    console.log('Google Sheet response:', response.status, await response.text())
 
     return NextResponse.json({ success: true })
 
