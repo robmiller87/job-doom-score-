@@ -110,6 +110,11 @@ export default function Home() {
     }
   }
 
+  const isMobile = () => {
+    if (typeof window === 'undefined') return false
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768
+  }
+
   const shareTwitter = () => {
     if (!result) return
     const { tier, message } = getTier(result.score)
@@ -117,11 +122,14 @@ export default function Home() {
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
-  const shareLinkedIn = async () => {
+  const shareLinkedIn = () => {
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`, "_blank")
+  }
+
+  const shareNative = async () => {
     const { tier, message } = getTier(result?.score || 50)
-    const shareText = `My AI doom status: ${tier}\n\n"${message}"\n\n300M jobs at risk. Is yours one of them?`
+    const shareText = `My AI doom status: ${tier} 💀\n\n"${message}"\n\n300M jobs at risk. Is yours one of them?`
     
-    // Use native share on mobile if available
     if (navigator.share) {
       try {
         await navigator.share({
@@ -129,14 +137,10 @@ export default function Home() {
           text: shareText,
           url: window.location.origin
         })
-        return
       } catch (e) {
-        // User cancelled or error - fall through to LinkedIn URL
+        // User cancelled
       }
     }
-    
-    // Fallback to LinkedIn URL
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
   const reset = () => {
@@ -218,18 +222,29 @@ export default function Home() {
             </div>
           )}
 
-          <div className="flex gap-2 md:gap-3 justify-center mb-4 md:mb-6">
+          {/* Desktop: Twitter + LinkedIn buttons */}
+          <div className="hidden md:flex gap-3 justify-center mb-6">
             <button
               onClick={shareTwitter}
-              className="bg-black text-white px-4 md:px-6 py-2 md:py-3 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors text-xs md:text-sm"
+              className="bg-black text-white px-6 py-3 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors text-sm"
             >
               Share on X
             </button>
             <button
               onClick={shareLinkedIn}
-              className="bg-[#0077b5] text-white px-4 md:px-6 py-2 md:py-3 font-bold uppercase tracking-wider hover:bg-[#006699] transition-colors text-xs md:text-sm"
+              className="bg-[#0077b5] text-white px-6 py-3 font-bold uppercase tracking-wider hover:bg-[#006699] transition-colors text-sm"
             >
               Share on LinkedIn
+            </button>
+          </div>
+          
+          {/* Mobile: Single share button */}
+          <div className="flex md:hidden justify-center mb-4">
+            <button
+              onClick={shareNative}
+              className="bg-black text-white px-8 py-3 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors text-sm"
+            >
+              Share Result
             </button>
           </div>
 
