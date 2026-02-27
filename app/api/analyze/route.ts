@@ -36,18 +36,36 @@ SCORING GUIDELINES:
 - 61-80 (IN DANGER): Junior roles, administrative work, easily automatable tasks
 - 81-100 (DOOMED): Data entry, basic customer support, routine clerical work
 
-KEY OWNERSHIP SIGNALS (these people are SAFE, score 0-20):
-- If their headline mentions THEIR OWN website/newsletter/company (e.g., "join our newsletter at mycompany.com") = they likely OWN it = SAFE
-- If job title includes: Founder, Co-founder, CEO, Owner, Managing Partner, GP, Chairman = SAFE
-- If they have 50K+ followers = significant personal brand = SAFE
-- If they're in crypto/web3 with leadership role = likely early/owner = SAFE
+OWNERSHIP SIGNALS → SAFE (score 0-20):
+- Job title contains: Founder, Co-founder, CEO, Owner, Managing Partner, GP, Chairman, Board Member, Investor
+- Headline mentions their own website/newsletter/company domain
+- 50K+ followers = massive personal brand
+- Works at small company with "PR", "Marketing", "Consulting", "Agency" in name = likely owner/partner
+- Crypto/web3 + leadership title = likely early team/owner
+- "Fractional", "Independent", "Self-employed", "Advisor" = sovereign, not employee
 
-KEY RISK FACTORS:
-- Software engineers are at MEDIUM risk (score 45-55) - market flooded + AI coding tools, but still needed
-- CMOs/Marketing leads are at HIGH risk - AI automating marketing
-- Junior/entry-level roles are HIGH risk
-- Physical trades (plumber, electrician) are SAFE - robots can't do it yet
-- Administrative/clerical work is DOOMED
+PROTECTED ROLES → SAFE or UNCERTAIN (score 0-40):
+- CTO, CFO, COO, CIO = core C-suite
+- VP, SVP, EVP, Director, Head of = senior leadership
+- Infrastructure, Backend, DevOps, Platform, Security engineers = hard to automate
+- Healthcare, Medical, Nursing, Trades, Construction = physical/regulated
+
+MEDIUM RISK → NERVOUS (score 41-60):
+- Software Engineer, Developer, Designer = market flooded + AI tools
+- Product Manager, Project Manager = AI coordination tools
+- Business Development, Account Manager = AI SDRs + automation
+- Marketing Manager (non-CMO) = AI handling campaigns
+
+HIGH RISK → IN DANGER (score 61-80):
+- CMO, CHRO = C-suite but dying functions
+- Recruiter, HR Manager = AI screening/interviewing
+- Copywriter, Content Writer = GPT-4 quality
+- Financial Analyst, Accountant = AI analysis
+
+DOOMED (score 81-100):
+- Assistant, Coordinator, Administrator = 70%+ automatable
+- Data Entry, Clerk, Receptionist = already being replaced
+- Customer Support, Call Center = chatbots dominating
 
 STRICT RULES (FOLLOW EXACTLY):
 1. NEVER use the word "undefined" in any factor - this is BANNED
@@ -55,8 +73,10 @@ STRICT RULES (FOLLOW EXACTLY):
 3. ALWAYS give specific, concrete reasons based on their actual role
 4. For badFactors: explain HOW AI threatens their job (e.g., "BD: AI SDRs replacing outreach")
 5. For goodFactors: explain WHY protected (e.g., "10 years = institutional knowledge")
-6. If Current Title is "Founder" or "CEO" or "Owner" → they are SAFE (score 0-20)
-7. If they work at a company with their name or a company they seem to own → likely SAFE
+6. If Current Title is "Founder" or "CEO" or "Owner" → SAFE (score 0-20)
+7. If company name sounds like a small agency/consultancy (contains "PR", "Marketing", "Consulting", "Solutions", "Partners", "Group", "Advisors", or their own name) and they're senior → likely owner = SAFE
+8. If experience data is missing/incomplete, infer from headline and company - don't assume the worst
+9. Prioritize the protective signals - if someone has 1 founder signal, weight it heavily
 
 Return ONLY valid JSON in this exact format:
 {
