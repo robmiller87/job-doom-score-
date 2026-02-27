@@ -42,13 +42,13 @@ SCORING GUIDELINES:
 - 61-80 (IN DANGER): Junior roles, administrative work, easily automatable tasks
 - 81-100 (DOOMED): Data entry, basic customer support, routine clerical work
 
-OWNERSHIP SIGNALS → SAFE (score 0-20):
-- Job title contains: Founder, Co-founder, CEO, Owner, Managing Partner, GP, Chairman, Board Member, Investor
-- Headline mentions their own website/newsletter/company domain
-- 50K+ followers = massive personal brand
-- Works at small company with "PR", "Marketing", "Consulting", "Agency" in name = likely owner/partner
-- Crypto/web3 + leadership title = likely early team/owner
-- "Fractional", "Independent", "Self-employed", "Advisor" = sovereign, not employee
+OWNERSHIP SIGNALS → MUST BE SAFE (score 0-20, NO EXCEPTIONS):
+- 50K+ followers = AUTOMATIC SAFE (score 15-20) - this alone makes them safe
+- Job title contains: Founder, Co-founder, CEO, Owner, Managing Partner, GP, Chairman, Board Member, Investor = SAFE
+- Headline mentions their own website/newsletter/company domain = likely OWNER = SAFE
+- Owns a newsletter = SAFE (newsletter owners have distribution, they don't get fired)
+- Crypto/web3 founder/early team = SAFE
+- "Fractional", "Independent", "Self-employed" = sovereign = SAFE
 
 PROTECTED ROLES → SAFE or UNCERTAIN (score 0-40):
 - CTO, CFO, COO, CIO = core C-suite
@@ -85,7 +85,11 @@ STRICT RULES (FOLLOW EXACTLY):
 9. If headline says "Founder", "CEO", "Owner", "Managing Partner" = they are SAFE
 10. If headline says "Software Engineer", "Developer", "Designer" = they are NERVOUS
 11. If headline only shows company name, check if company sounds like small agency = likely owner
-9. Prioritize the protective signals - if someone has 1 founder signal, weight it heavily
+9. Prioritize protective signals - ONE strong signal = SAFE:
+   - 50K+ followers alone = SAFE (score 15-20)
+   - Owns newsletter alone = SAFE
+   - Founder/CEO alone = SAFE
+   - These override any negatives
 
 Return ONLY valid JSON in this exact format:
 {
