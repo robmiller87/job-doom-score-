@@ -113,7 +113,7 @@ export default function Home() {
   const shareTwitter = () => {
     if (!result) return
     const { tier, message } = getTier(result.score)
-    const text = encodeURIComponent(`My AI doom status: ${tier} 💀\n\n"${message}"\n\nCheck yours:`)
+    const text = encodeURIComponent(`My AI doom status: ${tier} 💀\n\n"${message}"\n\n300M jobs at risk. Is yours one of them?\n\nCheck yours:`)
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(window.location.origin)}`, "_blank")
   }
 
