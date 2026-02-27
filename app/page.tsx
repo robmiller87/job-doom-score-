@@ -268,14 +268,22 @@ export default function Home() {
                       </button>
                       <button
                         onClick={async () => {
-                          // For now, log to console - could send to API/sheet later
-                          console.log('Feedback:', { 
-                            name: result?.name,
-                            score: result?.score,
-                            feedback: feedbackText, 
-                            email: feedbackEmail,
-                            url: url 
-                          });
+                          try {
+                            await fetch('/api/feedback', {
+                              method: 'POST',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ 
+                                name: result?.name,
+                                score: result?.score,
+                                tier: getTier(result?.score || 50).tier,
+                                feedback: feedbackText, 
+                                email: feedbackEmail,
+                                url: url 
+                              })
+                            });
+                          } catch (e) {
+                            console.error('Feedback failed:', e);
+                          }
                           setFeedbackSent(true);
                           setFeedbackText("");
                           setFeedbackEmail("");
