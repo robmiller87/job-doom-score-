@@ -61,6 +61,7 @@ export default function Home() {
   const [feedbackText, setFeedbackText] = useState("")
   const [feedbackEmail, setFeedbackEmail] = useState("")
   const [feedbackSent, setFeedbackSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   
   // Fake recently checked users for social proof
   const recentUsers = [
@@ -305,6 +306,8 @@ export default function Home() {
                       </button>
                       <button
                         onClick={async () => {
+                          if (submitting) return;
+                          setSubmitting(true);
                           try {
                             await fetch('/api/feedback', {
                               method: 'POST',
@@ -318,17 +321,19 @@ export default function Home() {
                                 url: url 
                               })
                             });
+                            setFeedbackSent(true);
+                            setFeedbackText("");
+                            setFeedbackEmail("");
                           } catch (e) {
                             console.error('Feedback failed:', e);
+                          } finally {
+                            setSubmitting(false);
                           }
-                          setFeedbackSent(true);
-                          setFeedbackText("");
-                          setFeedbackEmail("");
                         }}
-                        disabled={!feedbackText.trim()}
+                        disabled={!feedbackText.trim() || submitting}
                         className="flex-1 bg-black text-white px-4 py-2 font-bold disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Submit
+                        {submitting ? 'Submitting...' : 'Submit'}
                       </button>
                     </div>
                   </>
