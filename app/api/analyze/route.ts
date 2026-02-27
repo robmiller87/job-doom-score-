@@ -54,12 +54,18 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'designer': 'AI design tools (Midjourney, Figma AI) disrupting'
   }
 
-  // Very safe: entrepreneurs, founders, capital deployers (-25)
+  // Very safe: entrepreneurs, founders, capital deployers, sovereigns (-25)
   const verySafeTitles: Record<string, string> = {
     'co-founder': 'You built companies, you\'ll build more',
     'founder': 'Founders adapt, not get replaced',
     'entrepreneur': 'Entrepreneurs pivot, not get fired',
     'serial entrepreneur': 'You\'ve reinvented yourself before',
+    'solopreneur': 'You are the business',
+    'self-employed': 'No boss to fire you',
+    'independent': 'Independence = adaptability',
+    'sovereign': 'You answer to yourself',
+    'fractional': 'Portfolio career = diversified risk',
+    'advisor': 'Advisors get equity, not pink slips',
     'investor': 'You deploy capital, not labor',
     'venture': 'VCs fund AI, not fear it',
     'angel': 'Angel investors pick winners',
