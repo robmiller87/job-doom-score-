@@ -2,28 +2,36 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const PILOTERR_API_KEY = process.env.PILOTERR_API_KEY
 
-// DoomCheck Algorithm v2 - Order matters!
+// DoomCheck Algorithm v2.1 - Fixes from calibration testing
 function calculateDoomScore(profile: any): { score: number; goodFactors: string[]; badFactors: string[] } {
   const goodFactors: string[] = []
   const badFactors: string[] = []
   let score = 50 // Base score
   let isVerySafe = false // Flag to skip industry risk for founders/owners
+  let isLowRisk = false // Flag to skip early career penalty
 
   const headline = (profile.headline || '').toLowerCase()
   const summary = (profile.summary || '').toLowerCase()
   const combinedText = `${headline} ${summary}`
   
-  // Get current job from experiences
-  const currentJob = profile.experiences?.[0]?.company || ''
-  const allExperiences = (profile.experiences || []).map((e: any) => (e.company || '').toLowerCase()).join(' ')
+  // Get experience data - check titles too, not just companies
+  const experiences = profile.experiences || []
+  const allExperienceTitles = experiences.map((e: any) => (e.title || '').toLowerCase()).join(' ')
+  const allExperienceCompanies = experiences.map((e: any) => (e.company || '').toLowerCase()).join(' ')
+  
+  // Combined searchable text includes experience titles
+  const fullSearchText = `${combinedText} ${allExperienceTitles}`
 
   // ============================================
   // STEP 1: VERY SAFE CHECK (founders, owners, investors)
   // These people pivot, they don't get replaced. Check FIRST!
+  // Now also checks experience titles (not just headline)
   // ============================================
   const verySafeTitles: Record<string, string> = {
     'co-founder': 'You built companies, you\'ll build more',
+    'cofounder': 'You built companies, you\'ll build more',
     'founder': 'Founders adapt, not get replaced',
+    'founding': 'Founding team = ownership mentality',
     'entrepreneur': 'Entrepreneurs pivot, not get fired',
     'serial entrepreneur': 'You\'ve reinvented yourself before',
     'solopreneur': 'You are the business',
@@ -31,9 +39,12 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'independent consultant': 'Independence = adaptability',
     'sovereign': 'You answer to yourself',
     'fractional': 'Portfolio career = diversified risk',
+    'managing partner': 'You run the fund, not work for it',
+    'general partner': 'GP = you deploy capital',
     'investor': 'You deploy capital, not labor',
     'venture capital': 'VCs fund AI, not fear it',
     'angel investor': 'Angel investors pick winners',
+    'private equity': 'PE = capital allocation, not labor',
     'board member': 'Governance roles need human judgment',
     'chairman': 'You own the board, not a desk',
     'owner': 'You own the business, not a job',
@@ -42,11 +53,11 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
 
   let titleFound = false
   for (const [title, context] of Object.entries(verySafeTitles)) {
-    if (combinedText.includes(title)) {
+    if (fullSearchText.includes(title)) {
       score -= 25
       goodFactors.push(context)
       titleFound = true
-      isVerySafe = true // Skip industry risk later
+      isVerySafe = true // Skip industry risk + early career penalty
       break
     }
   }
@@ -71,10 +82,12 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // STEP 3: HIGH RISK TITLES (+20)
   // ============================================
   const highRiskTitles: Record<string, string> = {
-    'assistant': 'Administrative tasks: 70% automatable by 2027',
+    'executive assistant': 'EA tasks: 70% automatable by 2027',
+    'administrative assistant': 'Admin work: #1 category for AI replacement',
+    'personal assistant': 'AI assistants replacing PA roles',
     'coordinator': 'Coordination roles: AI scheduling up 400% since 2023',
-    'analyst': 'Junior analysts being replaced at major banks',
-    'specialist': 'Specialist tasks being automated across industries',
+    'junior analyst': 'Junior analysts being replaced at major banks',
+    'data analyst': 'Data analysis increasingly AI-powered',
     'administrator': 'Admin work: #1 category for AI replacement',
     'clerk': 'Clerical roles: 85% of tasks automatable today',
     'receptionist': 'AI receptionists now handle 60% of calls',
@@ -82,7 +95,8 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'bookkeeper': 'AI accounting tools 10x faster than humans',
     'transcription': 'Whisper AI made transcription obsolete',
     'secretary': 'AI assistants replacing secretary roles',
-    'support specialist': 'Chatbots handling 80% of support queries'
+    'support specialist': 'Chatbots handling 80% of support queries',
+    'customer support': 'Support tickets increasingly AI-handled',
   }
 
   if (!titleFound) {
@@ -101,28 +115,36 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // Includes SWE (market flooded + Copilot)
   // ============================================
   const mediumRiskTitles: Record<string, string> = {
-    'manager': 'Middle management shrinking as orgs flatten',
-    'supervisor': 'AI performance monitoring reducing supervisor roles',
-    'accountant': '40% of accounting tasks automatable',
-    'copywriter': 'GPT-4 matches human copywriting quality',
-    'content writer': 'AI generating 30% of marketing copy',
-    'paralegal': 'AI does doc review 10x faster',
-    'customer service': '80% of interactions going to bots',
+    'business development': 'BD: AI SDRs + automated outreach reducing headcount',
+    'account manager': 'Account management: CRM automation handling routine tasks',
+    'account executive': 'AE roles shrinking as AI handles qualification',
+    'sales manager': 'Sales management: AI forecasting + coaching tools',
     'marketing manager': 'AI handles targeting, copy, and optimization',
     'hr manager': 'AI screening resumes, scheduling, interviewing',
     'recruiter': 'AI sourcing up 300%, fewer recruiters needed',
-    'operations': 'Operations: AI automating workflows & reporting',
-    'sales op': 'Sales ops: CRM + AI forecasting reducing headcount',
+    'talent acquisition': 'Talent acquisition increasingly AI-assisted',
+    'operations manager': 'Operations: AI automating workflows & reporting',
+    'sales operations': 'Sales ops: CRM + AI forecasting reducing headcount',
     'business analyst': 'AI doing analysis faster than humans',
     'project manager': 'AI project tools automating coordination',
     'product manager': 'AI handling roadmaps, specs, prioritization',
+    'program manager': 'Program management: AI coordination tools',
     'consultant': 'AI automating analysis & recommendations',
+    'copywriter': 'GPT-4 matches human copywriting quality',
+    'content writer': 'AI generating 30% of marketing copy',
     'writer': 'AI content generation is mainstream',
     'editor': 'AI editing & proofreading tools everywhere',
-    'designer': 'AI design tools (Midjourney, Figma AI) disrupting',
+    'graphic designer': 'AI design tools (Midjourney, Canva AI) disrupting',
+    'ui designer': 'UI design increasingly AI-assisted',
+    'ux designer': 'UX research and design tools going AI',
+    'paralegal': 'AI does doc review 10x faster',
+    'customer service': '80% of interactions going to bots',
+    'accountant': '40% of accounting tasks automatable',
+    'financial analyst': 'Financial modeling increasingly AI-powered',
     'software engineer': 'SWE market flooded + Copilot eating junior roles',
     'software developer': 'SWE market saturated + AI coding tools',
-    'developer': 'Developer market competitive + AI assistants',
+    'frontend developer': 'Frontend: AI generating UI code',
+    'full stack': 'Full stack market competitive + AI assistants',
     'programmer': 'Coding increasingly AI-assisted',
   }
 
@@ -143,18 +165,20 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // ============================================
   const protectedSWE: Record<string, string> = {
     'infrastructure': 'Infrastructure expertise = hard to automate',
-    'backend': 'Backend architecture needs human judgment',
+    'backend engineer': 'Backend architecture needs human judgment',
     'devops': 'DevOps: complex systems need experienced humans',
-    'platform': 'Platform engineering = strategic, not routine',
+    'platform engineer': 'Platform engineering = strategic, not routine',
     'security engineer': 'Security requires adversarial human thinking',
     'site reliability': 'SRE: keeping systems alive needs humans',
     'systems architect': 'Architecture decisions need human judgment',
+    'solutions architect': 'Solutions architecture = client trust',
     'staff engineer': 'Staff+ roles = leadership, not just coding',
     'principal engineer': 'Principal roles = strategic, not replaceable',
+    'engineering manager': 'Engineering leadership = people management',
   }
 
   for (const [title, context] of Object.entries(protectedSWE)) {
-    if (combinedText.includes(title)) {
+    if (fullSearchText.includes(title)) {
       score -= 10
       goodFactors.push(context)
       break
@@ -169,15 +193,19 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'cto': 'You choose which AI to deploy',
     'cfo': 'Fiduciary responsibility = human required',
     'coo': 'Operations leadership needs human judgment',
+    'cio': 'IT strategy requires human judgment',
     'chief': 'C-suite accountability requires humans',
     'vp of': 'VP-level = relationships + strategy',
     'vice president': 'Relationship-driven, harder to automate',
+    'svp': 'Senior VP = strategic leadership',
+    'evp': 'Executive VP = C-suite adjacent',
     'director': 'Strategic decisions still need humans',
     'head of': 'Leadership roles harder to automate',
     'senior director': 'Senior leadership = judgment AI lacks',
     'partner': 'Partner-level = client relationships matter',
     'managing director': 'MD roles = client trust + judgment',
     'general manager': 'GM = accountability + local knowledge',
+    'senior': 'Seniority = relationships + judgment AI lacks',
   }
 
   if (!titleFound) {
@@ -186,6 +214,7 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
         score -= 15
         goodFactors.push(context)
         titleFound = true
+        isLowRisk = true
         break
       }
     }
@@ -197,18 +226,17 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // ============================================
   if (!isVerySafe) {
     const highRiskIndustries: Record<string, string> = {
-      'advertising': 'Programmatic + AI creative = fewer humans',
+      'advertising agency': 'Programmatic + AI creative = fewer humans',
       'journalism': 'AP using AI for reports since 2014',
       'retail': 'Automated checkout + AI inventory',
       'telemarketing': 'Robocalls won, humans lost',
       'call center': '85% of interactions will be AI by 2025',
       'insurance claims': 'Claims processing 90% automatable',
-      'banking': 'AI doing loans, fraud, trading',
       'legal services': 'AI contract review 10x faster than associates',
     }
 
     for (const [ind, context] of Object.entries(highRiskIndustries)) {
-      if (combinedText.includes(ind) || allExperiences.includes(ind)) {
+      if (combinedText.includes(ind) || allExperienceCompanies.includes(ind)) {
         score += 12
         badFactors.push(context)
         break
@@ -224,12 +252,13 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'nursing': '1M+ shortage = job security for decades',
     'emergency services': 'Split-second human judgment required',
     'plumbing': 'Every house is different',
-    'electrical work': 'Code compliance = human required',
+    'electrical contractor': 'Code compliance = human required',
     'physical therapy': 'Human touch is the product',
+    'mental health': 'Therapy requires human connection',
   }
 
   for (const [ind, context] of Object.entries(protectedIndustries)) {
-    if (combinedText.includes(ind) || allExperiences.includes(ind)) {
+    if (combinedText.includes(ind) || allExperienceCompanies.includes(ind)) {
       score -= 10
       goodFactors.push(context)
       break
@@ -242,16 +271,18 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   const techSkills: Record<string, string> = {
     'artificial intelligence': 'You\'re building the disruption',
     'machine learning': 'ML expertise in high demand',
+    'deep learning': 'Deep learning = cutting edge',
     'ai engineer': 'AI builders don\'t fear AI',
     'data science': 'AI needs humans to ask right questions',
     'robotics': 'You build the robots',
     'blockchain': 'Niche expertise = hard to replace',
     'web3': 'Emerging field = runway',
     'crypto': 'Specialized knowledge protects you',
+    'deep tech': 'Deep tech = hard to replicate',
   }
 
   for (const [skill, context] of Object.entries(techSkills)) {
-    if (combinedText.includes(skill)) {
+    if (fullSearchText.includes(skill)) {
       score -= 10
       goodFactors.push(context)
       break
@@ -260,15 +291,17 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
 
   // ============================================
   // STEP 9: EXPERIENCE COUNT
+  // Skip early career penalty for senior titles
   // ============================================
-  const expCount = profile.experiences?.length || 0
+  const expCount = experiences.length
   if (expCount > 10) {
     score -= 8
     goodFactors.push(`${expCount}+ roles = deep institutional knowledge`)
   } else if (expCount > 7) {
     score -= 5
     goodFactors.push(`${expCount}+ roles = institutional knowledge`)
-  } else if (expCount < 3) {
+  } else if (expCount < 3 && !isVerySafe && !isLowRisk) {
+    // Only penalize if NOT a senior title
     score += 5
     badFactors.push('Early career = more replaceable')
   }
@@ -293,7 +326,8 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   } else if (followers > 5000) {
     score -= 4
     goodFactors.push(`${followers.toLocaleString()} connections = strong network`)
-  } else if (followers < 500) {
+  } else if (followers < 500 && !isVerySafe && !isLowRisk) {
+    // Only penalize if NOT a senior title
     score += 3
     badFactors.push('Small network = fewer opportunities')
   }
@@ -301,9 +335,10 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
   // ============================================
   // STEP 11: Additional entrepreneur signals
   // ============================================
-  if (!isVerySafe && (combinedText.includes('started my') || combinedText.includes('built my') || combinedText.includes('own business'))) {
+  if (!isVerySafe && (combinedText.includes('started my') || combinedText.includes('built my') || combinedText.includes('own business') || combinedText.includes('my company'))) {
     score -= 10
     goodFactors.push('Entrepreneurial mindset = you adapt')
+    isVerySafe = true
   }
 
   // ============================================
@@ -342,7 +377,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (!PILOTERR_API_KEY) {
-      // Fallback: generate score from URL hash if no API key
       let hash = 0
       for (let i = 0; i < linkedinUrl.length; i++) {
         hash = ((hash << 5) - hash) + linkedinUrl.charCodeAt(i)
@@ -358,7 +392,6 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Call Piloterr API
     const response = await fetch(
       `https://piloterr.com/api/v2/linkedin/profile/info?query=${encodeURIComponent(linkedinUrl)}`,
       {
@@ -371,8 +404,6 @@ export async function POST(request: NextRequest) {
     if (!response.ok) {
       const error = await response.text()
       console.error('Piloterr error:', error)
-      
-      // Fallback on error
       let hash = 0
       for (let i = 0; i < linkedinUrl.length; i++) {
         hash = ((hash << 5) - hash) + linkedinUrl.charCodeAt(i)
@@ -389,7 +420,6 @@ export async function POST(request: NextRequest) {
 
     const profile = await response.json()
     
-    // Check for API error response
     if (profile.error) {
       console.error('Piloterr API error:', profile.error)
       let hash = 0
@@ -408,14 +438,17 @@ export async function POST(request: NextRequest) {
 
     const { score, goodFactors, badFactors } = calculateDoomScore(profile)
 
-    // Extract first name - Piloterr may use different field names
     const fullName = profile.full_name || profile.name || profile.fullName || 
                      (profile.first_name && profile.last_name ? `${profile.first_name} ${profile.last_name}` : null) ||
                      profile.firstName || null
     const firstName = fullName?.split(' ')[0] || null
     
-    // Debug log for Piloterr response structure
-    console.log('Piloterr profile fields:', Object.keys(profile), 'name:', fullName)
+    console.log('Piloterr profile:', { 
+      name: fullName, 
+      headline: profile.headline?.slice(0, 50),
+      experienceCount: profile.experiences?.length,
+      followers: profile.follower_count
+    })
 
     return NextResponse.json({
       score,
