@@ -408,8 +408,14 @@ export async function POST(request: NextRequest) {
 
     const { score, goodFactors, badFactors } = calculateDoomScore(profile)
 
-    // Extract first name from full_name
-    const firstName = profile.full_name?.split(' ')[0] || null
+    // Extract first name - Piloterr may use different field names
+    const fullName = profile.full_name || profile.name || profile.fullName || 
+                     (profile.first_name && profile.last_name ? `${profile.first_name} ${profile.last_name}` : null) ||
+                     profile.firstName || null
+    const firstName = fullName?.split(' ')[0] || null
+    
+    // Debug log for Piloterr response structure
+    console.log('Piloterr profile fields:', Object.keys(profile), 'name:', fullName)
 
     return NextResponse.json({
       score,
