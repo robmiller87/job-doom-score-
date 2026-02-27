@@ -54,18 +54,26 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     'designer': 'AI design tools (Midjourney, Figma AI) disrupting'
   }
 
-  const lowRiskTitles: Record<string, string> = {
+  // Very safe: entrepreneurs, founders, capital deployers (-25)
+  const verySafeTitles: Record<string, string> = {
     'co-founder': 'You built companies, you\'ll build more',
+    'founder': 'Founders adapt, not get replaced',
+    'entrepreneur': 'Entrepreneurs pivot, not get fired',
+    'serial entrepreneur': 'You\'ve reinvented yourself before',
     'investor': 'You deploy capital, not labor',
     'venture': 'VCs fund AI, not fear it',
-    'partner at': 'Partner-level = equity, not salary',
+    'angel': 'Angel investors pick winners',
     'board member': 'Governance roles need human judgment',
     'chairman': 'You own the board, not a desk',
+    'owner': 'You own the business, not a job',
+    'ceo': 'You deploy AI, not compete with it',
+  }
+
+  const lowRiskTitles: Record<string, string> = {
+    'partner at': 'Partner-level = equity, not salary',
+    'chief': 'Accountability requires human judgment',
     'director': 'Strategic decisions still need humans',
     'vp': 'Relationship-driven, harder to automate',
-    'chief': 'Accountability requires human judgment',
-    'founder': 'Founders adapt, not get replaced',
-    'ceo': 'You deploy AI, not compete with it',
     'cto': 'You choose which AI to use',
     'cfo': 'Fiduciary responsibility = human required',
     'head of': 'Leadership roles harder to automate',
@@ -100,6 +108,17 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
       if (headline.includes(title) || summary.includes(title)) {
         score += 10
         badFactors.push(context)
+        titleFound = true
+        break
+      }
+    }
+  }
+
+  if (!titleFound) {
+    for (const [title, context] of Object.entries(verySafeTitles)) {
+      if (headline.includes(title) || summary.includes(title)) {
+        score -= 25
+        goodFactors.push(context)
         titleFound = true
         break
       }
@@ -216,8 +235,8 @@ function calculateDoomScore(profile: any): { score: number; goodFactors: string[
     badFactors.push('Small network = fewer opportunities')
   }
 
-  // Entrepreneur signal
-  if (summary.includes('founder') || summary.includes('ceo') || summary.includes('started') || currentJob.toLowerCase().includes('consultancy')) {
+  // Additional entrepreneur signals (if not caught by title)
+  if (!titleFound && (summary.includes('started my') || summary.includes('built my') || summary.includes('own business') || currentJob.toLowerCase().includes('consultancy'))) {
     score -= 10
     goodFactors.push('Entrepreneurial mindset = you adapt')
   }
