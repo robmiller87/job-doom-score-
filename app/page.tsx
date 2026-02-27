@@ -316,7 +316,7 @@ Check yours: https://doomcheck.com`
             type="text"
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
-            placeholder="e.g. Marketing Manager"
+            placeholder="e.g. Uber driver"
             className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl text-lg focus:border-orange-500 focus:outline-none mb-3"
             autoComplete="off"
             autoCapitalize="words"
