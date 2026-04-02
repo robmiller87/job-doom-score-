@@ -292,14 +292,25 @@ Check yours: https://doomcheck.com`
           <span className="text-orange-500">CHECK</span>
         </h1>
         
-        <a 
-          href="https://www.mckinsey.com/featured-insights/future-of-work/jobs-lost-jobs-gained-what-the-future-of-work-will-mean-for-jobs-skills-and-wages"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xs text-gray-400 hover:text-gray-600 underline mb-6 sm:mb-8 block"
-        >
-          McKinsey: 375M workers may need new jobs by 2030 →
-        </a>
+        <div className="space-y-3 mb-6 sm:mb-8">
+          <a 
+            href="/blog"
+            className="inline-flex items-center space-x-2 text-red-600 hover:text-red-700 transition-colors text-sm font-medium"
+          >
+            <span>🚨</span>
+            <span>Oracle just fired 30,000 people - Read the latest</span>
+            <span>→</span>
+          </a>
+          
+          <a 
+            href="https://www.mckinsey.com/featured-insights/future-of-work/jobs-lost-jobs-gained-what-the-future-of-work-will-mean-for-jobs-skills-and-wages"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-gray-400 hover:text-gray-600 underline block"
+          >
+            McKinsey: 375M workers may need new jobs by 2030 →
+          </a>
+        </div>
 
         {/* Main headline */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-black mb-3 sm:mb-4 leading-tight">
