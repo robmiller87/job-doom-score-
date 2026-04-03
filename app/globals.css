@@ -4,6 +4,24 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* Blog article subtitle styling */
+.prose h2 {
+  @apply text-2xl font-bold text-red-400 mt-8 mb-4 border-b border-gray-700 pb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-semibold text-red-300 mt-6 mb-3;
+}
+
+/* Enhanced blockquote styling */
+.prose blockquote {
+  @apply border-l-4 border-red-500 pl-4 italic text-gray-300 bg-gray-900 py-2 my-6;
+}
+
+.prose blockquote cite {
+  @apply text-sm text-gray-500 not-italic block mt-2;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
