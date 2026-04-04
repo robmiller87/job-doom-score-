@@ -4,11 +4,11 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Are You Cooked? | AI Job Risk Calculator",
-  description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
+  description: "Check if AI is coming for YOUR job. Free AI job risk calculator analyzes 300+ million jobs. Enter your job title and get your doom score in 5 seconds. No signup required.",
   metadataBase: new URL('https://www.doomcheck.com'),
   openGraph: {
     title: "Are You Cooked? | AI Job Risk Calculator",
-    description: "300 million jobs will be affected by AI. Enter your job title and find out if you're cooked in 5 seconds.",
+    description: "Check if AI is coming for YOUR job. Free AI job risk calculator analyzes 300+ million jobs. Enter your job title and get your doom score in 5 seconds.",
     type: "website",
     siteName: "DoomCheck",
     url: "https://www.doomcheck.com",
@@ -24,9 +24,13 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Are You Cooked?",
-    description: "Find out if AI is coming for your job. Takes 5 seconds.",
+    description: "Check if AI is coming for YOUR job. Free calculator. Takes 5 seconds.",
     images: ["https://www.doomcheck.com/og-image.png?v=6"],
   },
+  keywords: ["AI job risk", "job automation", "AI replacement", "career safety", "job security", "artificial intelligence jobs", "doom calculator", "job displacement"],
+  authors: [{ name: "DoomCheck" }],
+  creator: "DoomCheck",
+  publisher: "DoomCheck",
 }
 
 export default function RootLayout({
@@ -37,6 +41,41 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Structured Data for Rich Snippets */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "DoomCheck - Are You Cooked?",
+              "description": "Free AI job risk calculator. Check if artificial intelligence is coming for your job. Enter your job title and get your doom score in 5 seconds.",
+              "url": "https://doomcheck.com",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "author": {
+                "@type": "Organization",
+                "name": "DoomCheck"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "DoomCheck"
+              },
+              "featureList": [
+                "AI job risk analysis",
+                "Job automation scoring",
+                "Career safety assessment",
+                "AI timeline predictions",
+                "Free job security check"
+              ]
+            })
+          }}
+        />
         {/* Meta Pixel */}
         <script
           dangerouslySetInnerHTML={{
