@@ -3,6 +3,14 @@ import Link from 'next/link'
 export default function BlogPage() {
   const posts = [
     {
+      slug: 'q1-2026-80k-layoffs-ai',
+      title: '80,000 Tech Workers Gone in Q1 2026 — Half Replaced by AI',
+      excerpt: '78,557 tech jobs cut in three months. 48% explicitly due to AI. At this pace, 265K gone by year end. The numbers are accelerating.',
+      date: 'April 13, 2026',
+      readTime: '5 min read',
+      tags: ['Q1 2026', 'AI Layoffs', 'Industry Report']
+    },
+    {
       slug: 'oracle-30k-layoffs',
       title: 'Oracle Just Fired 30,000 People With a 6 AM Email - Are You Next?',
       excerpt: 'Oracle cut 18% of its workforce overnight to fund AI spending. Their stock went up 2%. The robots are winning.',
