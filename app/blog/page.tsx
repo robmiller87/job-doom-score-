@@ -3,6 +3,14 @@ import Link from 'next/link'
 export default function BlogPage() {
   const posts = [
     {
+      slug: 'coinbase-ai-native-layoffs',
+      title: 'Coinbase Just Said the Quiet Part Out Loud: The AI-Native Company Has Arrived',
+      excerpt: 'Coinbase is cutting 14% and rebuilding around AI-native pods, fewer layers, no pure managers, and one-person teams. The company as intelligence has arrived.',
+      date: 'May 5, 2026',
+      readTime: '5 min read',
+      tags: ['Coinbase', 'AI-Native Company', 'Layoffs']
+    },
+    {
       slug: 'q1-2026-80k-layoffs-ai',
       title: '80,000 Tech Workers Gone in Q1 2026 — Half Replaced by AI',
       excerpt: '78,557 tech jobs cut in three months. 48% explicitly due to AI. At this pace, 265K gone by year end. The numbers are accelerating.',
